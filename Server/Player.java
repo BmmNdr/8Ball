@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Player extends Thread {
+public class Player{
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -16,8 +16,7 @@ public class Player extends Thread {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
-    @Override
-    public void run() {
+    public void test() {
         String str;
         try {
 
@@ -33,4 +32,6 @@ public class Player extends Thread {
 
         } catch (IOException e) {}
     }
+
+    //Your turn method, returs cue direction and power (Vector??)
 }
