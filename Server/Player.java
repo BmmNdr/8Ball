@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Player{
+public class Player {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -32,12 +32,17 @@ public class Player{
             out.close();
             clientSocket.close();
 
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
-    //Your turn method, returs cue direction and power (Vector??)
-    public Vector yourTurn(){
+    // Your turn method, returs cue direction and power (Vector??)
+    public Vector yourTurn() { // TODO
 
         return new Vector();
+    }
+
+    public void sendBallsPositions(String position) {
+        out.println(position);
     }
 }
