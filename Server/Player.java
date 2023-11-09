@@ -9,6 +9,8 @@ public class Player{
     private PrintWriter out;
     private BufferedReader in;
 
+    public boolean hasHalf;
+
     public Player(Socket socket) throws IOException {
         clientSocket = socket;
 
@@ -34,4 +36,8 @@ public class Player{
     }
 
     //Your turn method, returs cue direction and power (Vector??)
+    public Vector yourTurn(){
+
+        return new Vector();
+    }
 }
