@@ -1,4 +1,8 @@
 # Client-Server 8Ball in java
+## Client
+
+### Class Diagram
+![](/UML/ServerClassDiagram/out/UML/ServerClassDiagram/ServerClassDiagram/Client_ClassDiagram.svg)
 
 ## Server
 

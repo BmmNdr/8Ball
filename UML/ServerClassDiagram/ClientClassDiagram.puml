@@ -1,0 +1,40 @@
+@startuml Client_ClassDiagram
+
+class app {
+    +static void main(String[] args)
+}
+
+class GUI {
+    -List<Ball> balls
+    -JButton button
+    -JTextField textField
+    +GUI()
+    +void updateBalls(List<Ball> balls)
+    +void paint(Graphics g)
+    +JButton getButton()
+    +String getPlayerMove()
+}
+
+class GameClient {
+    -Socket clientSocket
+    -PrintWriter out
+    -BufferedReader in
+    -GUI gui
+    +GameClient(GUI gui)
+    +void receiveGameState()
+    +void sendPlayerMove(String move)
+    +void close()
+}
+
+class Ball {
+    -int number
+    -int x
+    -int y
+    +Ball(int number, int x, int y)
+}
+
+app --> GameClient
+GameClient --> GUI
+GUI --> Ball
+
+@enduml

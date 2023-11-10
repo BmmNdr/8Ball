@@ -1,23 +1,26 @@
-import java.io.BufferedReader;
+// app.java
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class app {
-    public static void main(String[] args) throws UnknownHostException, IOException {
-        Socket clientSocket = new Socket("127.0.0.1", 666);
+    public static void main(String[] args) throws IOException {
+        GUI gui = new GUI();
+        GameClient gameClient = new GameClient(gui);
 
-        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-    
-        out.println("Hello Server");
+        // Add an ActionListener to the GUI's button that sends the user's move to the server
+        gui.getButton().addActionListener(e -> {
+            String playerMove = gui.getPlayerMove();
+            gameClient.sendPlayerMove(playerMove);
+        });
 
-        String str = in.readLine();
+        while (true) {
+            gameClient.receiveGameState();
 
-        System.out.println(str);
-
-        clientSocket.close();
+            // Sleep for a bit to simulate the time it takes for a player to make a move
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
