@@ -3,4 +3,4 @@
 ## Server
 
 ### Class Diagram
-![](/UML/ServerClassDiagram/ServerClassDiagram/Server_ClassDiagram.svg)
+![](/UML/ServerClassDiagram/out/UML/ServerClassDiagram/ServerClassDiagram/Server_ClassDiagram.svg)
