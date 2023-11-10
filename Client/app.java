@@ -12,8 +12,11 @@ public class app {
             gameClient.sendPlayerMove(playerMove);
         });
 
+
+        //TODO riceve un messaggio dal server, poi capisce cosa fare (se muovere le palline, attendere o inviare una mossa)...
+
         while (true) {
-            gameClient.receiveGameState();
+            gameClient.receiveGameState(); //TODO ...quindi al receiveGameState invio una stringa con le palline in CSV
 
             // Sleep for a bit to simulate the time it takes for a player to make a move
             try {

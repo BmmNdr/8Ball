@@ -9,7 +9,7 @@ public class MovementManager extends Thread { // Sends ball position to all play
     public void run() {
         while (game.ballsMoving) {
             // create string with balls position
-            String toSend = "";
+            String toSend = "paint;";
 
             for (Ball b : game.fulls)
                 toSend += b.toString() + ";";
