@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="541px" preserveAspectRatio="none" style="width:596px;height:541px;background:#FFFFFF;" version="1.1" viewBox="0 0 596 541" width="596px" zoomAndPan="magnify"><defs/><g><!--MD5=[c60af77fe5573b84a4aa4bce89659574]
+class Server--><g id="elem_Server"><rect codeLine="2" fill="#F1F1F1" height="118.4375" id="Server" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="198" x="391.5" y="220.5"/><ellipse cx="465.25" cy="236.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M468.0156,232.375 Q468.1719,232.1563 468.3594,232.0469 Q468.5469,231.9375 468.7656,231.9375 Q469.1406,231.9375 469.375,232.2031 Q469.6094,232.4531 469.6094,233.0625 L469.6094,234.5156 Q469.6094,235.125 469.375,235.3906 Q469.1406,235.6563 468.7656,235.6563 Q468.4219,235.6563 468.2188,235.4531 Q468.0156,235.2656 467.9063,234.75 Q467.8594,234.3906 467.6719,234.2031 Q467.3438,233.8281 466.7344,233.6094 Q466.125,233.3906 465.5,233.3906 Q464.7344,233.3906 464.0938,233.7188 Q463.4688,234.0469 462.9688,234.7969 Q462.4844,235.5469 462.4844,236.5781 L462.4844,237.6719 Q462.4844,238.9063 463.375,239.7344 Q464.2656,240.5469 465.8594,240.5469 Q466.7969,240.5469 467.4531,240.2969 Q467.8438,240.1406 468.2656,239.7031 Q468.5313,239.4375 468.6719,239.3594 Q468.8281,239.2813 469.0313,239.2813 Q469.3594,239.2813 469.6094,239.5469 Q469.875,239.7969 469.875,240.1406 Q469.875,240.4844 469.5313,240.8906 Q469.0313,241.4688 468.2344,241.7969 Q467.1563,242.25 465.8594,242.25 Q464.3438,242.25 463.1406,241.625 Q462.1563,241.125 461.4688,240.0625 Q460.7813,238.9844 460.7813,237.7031 L460.7813,236.5469 Q460.7813,235.2188 461.3906,234.0781 Q462.0156,232.9219 463.1094,232.3125 Q464.2031,231.6875 465.4375,231.6875 Q466.1719,231.6875 466.8125,231.8594 Q467.4688,232.0156 468.0156,232.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="485.75" y="242.2285">Server</text><line style="stroke:#181818;stroke-width:0.5;" x1="392.5" x2="588.5" y1="252.5" y2="252.5"/><ellipse cx="402.5" cy="266.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="172" x="411.5" y="271.0332">ServerSocket serverSocket</text><ellipse cx="402.5" cy="284.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="44" x="411.5" y="288.6426">int port</text><ellipse cx="402.5" cy="302.0234" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="411.5" y="306.252">boolean startGame</text><ellipse cx="402.5" cy="319.6328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="411.5" y="323.8613">GameManager game</text><line style="stroke:#181818;stroke-width:0.5;" x1="392.5" x2="588.5" y1="330.9375" y2="330.9375"/></g><!--MD5=[94c7f9372c62fd735ca66cf2c8b73ece]
+class Ball--><g id="elem_Ball"><rect codeLine="9" fill="#F1F1F1" height="153.6563" id="Ball" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="7" y="202.5"/><ellipse cx="70.75" cy="218.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M73.5156,214.375 Q73.6719,214.1563 73.8594,214.0469 Q74.0469,213.9375 74.2656,213.9375 Q74.6406,213.9375 74.875,214.2031 Q75.1094,214.4531 75.1094,215.0625 L75.1094,216.5156 Q75.1094,217.125 74.875,217.3906 Q74.6406,217.6563 74.2656,217.6563 Q73.9219,217.6563 73.7188,217.4531 Q73.5156,217.2656 73.4063,216.75 Q73.3594,216.3906 73.1719,216.2031 Q72.8438,215.8281 72.2344,215.6094 Q71.625,215.3906 71,215.3906 Q70.2344,215.3906 69.5938,215.7188 Q68.9688,216.0469 68.4688,216.7969 Q67.9844,217.5469 67.9844,218.5781 L67.9844,219.6719 Q67.9844,220.9063 68.875,221.7344 Q69.7656,222.5469 71.3594,222.5469 Q72.2969,222.5469 72.9531,222.2969 Q73.3438,222.1406 73.7656,221.7031 Q74.0313,221.4375 74.1719,221.3594 Q74.3281,221.2813 74.5313,221.2813 Q74.8594,221.2813 75.1094,221.5469 Q75.375,221.7969 75.375,222.1406 Q75.375,222.4844 75.0313,222.8906 Q74.5313,223.4688 73.7344,223.7969 Q72.6563,224.25 71.3594,224.25 Q69.8438,224.25 68.6406,223.625 Q67.6563,223.125 66.9688,222.0625 Q66.2813,220.9844 66.2813,219.7031 L66.2813,218.5469 Q66.2813,217.2188 66.8906,216.0781 Q67.5156,214.9219 68.6094,214.3125 Q69.7031,213.6875 70.9375,213.6875 Q71.6719,213.6875 72.3125,213.8594 Q72.9688,214.0156 73.5156,214.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="23" x="91.25" y="224.2285">Ball</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="165" y1="234.5" y2="234.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="245.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="27" y="253.0332">GameManager game</text><ellipse cx="18" cy="266.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="27" y="270.6426">Vector coordinate</text><ellipse cx="18" cy="284.0234" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="27" y="288.252">Vector speed</text><ellipse cx="18" cy="301.6328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="27" y="305.8613">boolean isHalf</text><ellipse cx="18" cy="319.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="27" y="323.4707">boolean isPotted</text><ellipse cx="18" cy="336.8516" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="27" y="341.0801">int number</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="165" y1="348.1563" y2="348.1563"/></g><!--MD5=[5d909b6c20725e19f5c6863827561ff4]
+class Constants--><g id="elem_Constants"><rect codeLine="18" fill="#F1F1F1" height="100.8281" id="Constants" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="123" x="388" y="15.5"/><ellipse cx="415.15" cy="31.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M417.9156,27.375 Q418.0719,27.1563 418.2594,27.0469 Q418.4469,26.9375 418.6656,26.9375 Q419.0406,26.9375 419.275,27.2031 Q419.5094,27.4531 419.5094,28.0625 L419.5094,29.5156 Q419.5094,30.125 419.275,30.3906 Q419.0406,30.6563 418.6656,30.6563 Q418.3219,30.6563 418.1188,30.4531 Q417.9156,30.2656 417.8063,29.75 Q417.7594,29.3906 417.5719,29.2031 Q417.2438,28.8281 416.6344,28.6094 Q416.025,28.3906 415.4,28.3906 Q414.6344,28.3906 413.9938,28.7188 Q413.3688,29.0469 412.8688,29.7969 Q412.3844,30.5469 412.3844,31.5781 L412.3844,32.6719 Q412.3844,33.9063 413.275,34.7344 Q414.1656,35.5469 415.7594,35.5469 Q416.6969,35.5469 417.3531,35.2969 Q417.7438,35.1406 418.1656,34.7031 Q418.4313,34.4375 418.5719,34.3594 Q418.7281,34.2813 418.9313,34.2813 Q419.2594,34.2813 419.5094,34.5469 Q419.775,34.7969 419.775,35.1406 Q419.775,35.4844 419.4313,35.8906 Q418.9313,36.4688 418.1344,36.7969 Q417.0563,37.25 415.7594,37.25 Q414.2438,37.25 413.0406,36.625 Q412.0563,36.125 411.3688,35.0625 Q410.6813,33.9844 410.6813,32.7031 L410.6813,31.5469 Q410.6813,30.2188 411.2906,29.0781 Q411.9156,27.9219 413.0094,27.3125 Q414.1031,26.6875 415.3375,26.6875 Q416.0719,26.6875 416.7125,26.8594 Q417.3688,27.0156 417.9156,27.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="431.85" y="37.2285">Constants</text><line style="stroke:#181818;stroke-width:0.5;" x1="389" x2="510" y1="47.5" y2="47.5"/><ellipse cx="399" cy="61.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="74" x="408" y="66.0332">int ballMass</text><ellipse cx="399" cy="79.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="85" x="408" y="83.6426">int ballRadius</text><ellipse cx="399" cy="97.0234" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="97" x="408" y="101.252">int tableFriction</text><line style="stroke:#181818;stroke-width:0.5;" x1="389" x2="510" y1="108.3281" y2="108.3281"/></g><!--MD5=[ebecb9917226677787fac7e9a2731304]
+class GameManager--><g id="elem_GameManager"><rect codeLine="24" fill="#F1F1F1" height="188.875" id="GameManager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="155" x="201" y="185"/><ellipse cx="229.05" cy="201" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M231.8156,196.875 Q231.9719,196.6563 232.1594,196.5469 Q232.3469,196.4375 232.5656,196.4375 Q232.9406,196.4375 233.175,196.7031 Q233.4094,196.9531 233.4094,197.5625 L233.4094,199.0156 Q233.4094,199.625 233.175,199.8906 Q232.9406,200.1563 232.5656,200.1563 Q232.2219,200.1563 232.0188,199.9531 Q231.8156,199.7656 231.7063,199.25 Q231.6594,198.8906 231.4719,198.7031 Q231.1438,198.3281 230.5344,198.1094 Q229.925,197.8906 229.3,197.8906 Q228.5344,197.8906 227.8938,198.2188 Q227.2688,198.5469 226.7688,199.2969 Q226.2844,200.0469 226.2844,201.0781 L226.2844,202.1719 Q226.2844,203.4063 227.175,204.2344 Q228.0656,205.0469 229.6594,205.0469 Q230.5969,205.0469 231.2531,204.7969 Q231.6438,204.6406 232.0656,204.2031 Q232.3313,203.9375 232.4719,203.8594 Q232.6281,203.7813 232.8313,203.7813 Q233.1594,203.7813 233.4094,204.0469 Q233.675,204.2969 233.675,204.6406 Q233.675,204.9844 233.3313,205.3906 Q232.8313,205.9688 232.0344,206.2969 Q230.9563,206.75 229.6594,206.75 Q228.1438,206.75 226.9406,206.125 Q225.9563,205.625 225.2688,204.5625 Q224.5813,203.4844 224.5813,202.2031 L224.5813,201.0469 Q224.5813,199.7188 225.1906,198.5781 Q225.8156,197.4219 226.9094,196.8125 Q228.0031,196.1875 229.2375,196.1875 Q229.9719,196.1875 230.6125,196.3594 Q231.2688,196.5156 231.8156,196.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="245.95" y="206.7285">GameManager</text><line style="stroke:#181818;stroke-width:0.5;" x1="202" x2="355" y1="217" y2="217"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="228.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="221" y="235.5332">Player player1</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="245.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="221" y="253.1426">Player player2</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="263.5234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="221" y="270.752">boolean turn</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="281.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="221" y="288.3613">boolean ballsMoving</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="298.7422"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="221" y="305.9707">List&lt;Ball&gt; halfs</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="316.3516"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="221" y="323.5801">List&lt;Ball&gt; fulls</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="333.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81" x="221" y="341.1895">Ball eightBall</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="209" y="351.5703"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="221" y="358.7988">Ball cueBall</text><line style="stroke:#181818;stroke-width:0.5;" x1="202" x2="355" y1="365.875" y2="365.875"/></g><!--MD5=[6b3237f8f256dcca2f90cdc892012558]
+class MovementManager--><g id="elem_MovementManager"><rect codeLine="35" fill="#F1F1F1" height="65.6094" id="MovementManager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="199" y="451.5"/><ellipse cx="216.7" cy="467.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M219.4656,463.375 Q219.6219,463.1563 219.8094,463.0469 Q219.9969,462.9375 220.2156,462.9375 Q220.5906,462.9375 220.825,463.2031 Q221.0594,463.4531 221.0594,464.0625 L221.0594,465.5156 Q221.0594,466.125 220.825,466.3906 Q220.5906,466.6563 220.2156,466.6563 Q219.8719,466.6563 219.6688,466.4531 Q219.4656,466.2656 219.3563,465.75 Q219.3094,465.3906 219.1219,465.2031 Q218.7938,464.8281 218.1844,464.6094 Q217.575,464.3906 216.95,464.3906 Q216.1844,464.3906 215.5438,464.7188 Q214.9188,465.0469 214.4188,465.7969 Q213.9344,466.5469 213.9344,467.5781 L213.9344,468.6719 Q213.9344,469.9063 214.825,470.7344 Q215.7156,471.5469 217.3094,471.5469 Q218.2469,471.5469 218.9031,471.2969 Q219.2938,471.1406 219.7156,470.7031 Q219.9813,470.4375 220.1219,470.3594 Q220.2781,470.2813 220.4813,470.2813 Q220.8094,470.2813 221.0594,470.5469 Q221.325,470.7969 221.325,471.1406 Q221.325,471.4844 220.9813,471.8906 Q220.4813,472.4688 219.6844,472.7969 Q218.6063,473.25 217.3094,473.25 Q215.7938,473.25 214.5906,472.625 Q213.6063,472.125 212.9188,471.0625 Q212.2313,469.9844 212.2313,468.7031 L212.2313,467.5469 Q212.2313,466.2188 212.8406,465.0781 Q213.4656,463.9219 214.5594,463.3125 Q215.6531,462.6875 216.8875,462.6875 Q217.6219,462.6875 218.2625,462.8594 Q218.9188,463.0156 219.4656,463.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="231.3" y="473.2285">MovementManager</text><line style="stroke:#181818;stroke-width:0.5;" x1="200" x2="357" y1="483.5" y2="483.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="207" y="494.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="219" y="502.0332">GameManager game</text><line style="stroke:#181818;stroke-width:0.5;" x1="200" x2="357" y1="509.1094" y2="509.1094"/></g><!--MD5=[2cb47ba637a0d19583e6199456f6ad0b]
+class Player--><g id="elem_Player"><rect codeLine="39" fill="#F1F1F1" height="118.4375" id="Player" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="149" x="204" y="7"/><ellipse cx="254.25" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M257.0156,18.875 Q257.1719,18.6563 257.3594,18.5469 Q257.5469,18.4375 257.7656,18.4375 Q258.1406,18.4375 258.375,18.7031 Q258.6094,18.9531 258.6094,19.5625 L258.6094,21.0156 Q258.6094,21.625 258.375,21.8906 Q258.1406,22.1563 257.7656,22.1563 Q257.4219,22.1563 257.2188,21.9531 Q257.0156,21.7656 256.9063,21.25 Q256.8594,20.8906 256.6719,20.7031 Q256.3438,20.3281 255.7344,20.1094 Q255.125,19.8906 254.5,19.8906 Q253.7344,19.8906 253.0938,20.2188 Q252.4688,20.5469 251.9688,21.2969 Q251.4844,22.0469 251.4844,23.0781 L251.4844,24.1719 Q251.4844,25.4063 252.375,26.2344 Q253.2656,27.0469 254.8594,27.0469 Q255.7969,27.0469 256.4531,26.7969 Q256.8438,26.6406 257.2656,26.2031 Q257.5313,25.9375 257.6719,25.8594 Q257.8281,25.7813 258.0313,25.7813 Q258.3594,25.7813 258.6094,26.0469 Q258.875,26.2969 258.875,26.6406 Q258.875,26.9844 258.5313,27.3906 Q258.0313,27.9688 257.2344,28.2969 Q256.1563,28.75 254.8594,28.75 Q253.3438,28.75 252.1406,28.125 Q251.1563,27.625 250.4688,26.5625 Q249.7813,25.4844 249.7813,24.2031 L249.7813,23.0469 Q249.7813,21.7188 250.3906,20.5781 Q251.0156,19.4219 252.1094,18.8125 Q253.2031,18.1875 254.4375,18.1875 Q255.1719,18.1875 255.8125,18.3594 Q256.4688,18.5156 257.0156,18.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="274.75" y="28.7285">Player</text><line style="stroke:#181818;stroke-width:0.5;" x1="205" x2="352" y1="39" y2="39"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212" y="50.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="224" y="57.5332">Socket clientSocket</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212" y="67.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="224" y="75.1426">PrintWriter out</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="212" y="85.5234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="224" y="92.752">BufferedReader in</text><ellipse cx="215" cy="106.1328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="224" y="110.3613">boolean hasHalf</text><line style="stroke:#181818;stroke-width:0.5;" x1="205" x2="352" y1="117.4375" y2="117.4375"/></g><!--MD5=[ea775af43a0da7cb543d6bee4ab62c40]
+class Vector--><g id="elem_Vector"><rect codeLine="46" fill="#F1F1F1" height="100.8281" id="Vector" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="73" x="50" y="434"/><ellipse cx="65" cy="450" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M67.7656,445.875 Q67.9219,445.6563 68.1094,445.5469 Q68.2969,445.4375 68.5156,445.4375 Q68.8906,445.4375 69.125,445.7031 Q69.3594,445.9531 69.3594,446.5625 L69.3594,448.0156 Q69.3594,448.625 69.125,448.8906 Q68.8906,449.1563 68.5156,449.1563 Q68.1719,449.1563 67.9688,448.9531 Q67.7656,448.7656 67.6563,448.25 Q67.6094,447.8906 67.4219,447.7031 Q67.0938,447.3281 66.4844,447.1094 Q65.875,446.8906 65.25,446.8906 Q64.4844,446.8906 63.8438,447.2188 Q63.2188,447.5469 62.7188,448.2969 Q62.2344,449.0469 62.2344,450.0781 L62.2344,451.1719 Q62.2344,452.4063 63.125,453.2344 Q64.0156,454.0469 65.6094,454.0469 Q66.5469,454.0469 67.2031,453.7969 Q67.5938,453.6406 68.0156,453.2031 Q68.2813,452.9375 68.4219,452.8594 Q68.5781,452.7813 68.7813,452.7813 Q69.1094,452.7813 69.3594,453.0469 Q69.625,453.2969 69.625,453.6406 Q69.625,453.9844 69.2813,454.3906 Q68.7813,454.9688 67.9844,455.2969 Q66.9063,455.75 65.6094,455.75 Q64.0938,455.75 62.8906,455.125 Q61.9063,454.625 61.2188,453.5625 Q60.5313,452.4844 60.5313,451.2031 L60.5313,450.0469 Q60.5313,448.7188 61.1406,447.5781 Q61.7656,446.4219 62.8594,445.8125 Q63.9531,445.1875 65.1875,445.1875 Q65.9219,445.1875 66.5625,445.3594 Q67.2188,445.5156 67.7656,445.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="79" y="455.7285">Vector</text><line style="stroke:#181818;stroke-width:0.5;" x1="51" x2="122" y1="466" y2="466"/><ellipse cx="61" cy="480.3047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="70" y="484.5332">int x</text><ellipse cx="61" cy="497.9141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="70" y="502.1426">int y</text><ellipse cx="61" cy="515.5234" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="70" y="519.752">float m</text><line style="stroke:#181818;stroke-width:0.5;" x1="51" x2="122" y1="526.8281" y2="526.8281"/></g><!--MD5=[948346f2dfe9866ea883595a582714fa]
+class Thread--><g id="elem_Thread"><rect codeLine="53" fill="#F1F1F1" height="48" id="Thread" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="47.5" y="42"/><ellipse cx="62.5" cy="58" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M65.2656,53.875 Q65.4219,53.6563 65.6094,53.5469 Q65.7969,53.4375 66.0156,53.4375 Q66.3906,53.4375 66.625,53.7031 Q66.8594,53.9531 66.8594,54.5625 L66.8594,56.0156 Q66.8594,56.625 66.625,56.8906 Q66.3906,57.1563 66.0156,57.1563 Q65.6719,57.1563 65.4688,56.9531 Q65.2656,56.7656 65.1563,56.25 Q65.1094,55.8906 64.9219,55.7031 Q64.5938,55.3281 63.9844,55.1094 Q63.375,54.8906 62.75,54.8906 Q61.9844,54.8906 61.3438,55.2188 Q60.7188,55.5469 60.2188,56.2969 Q59.7344,57.0469 59.7344,58.0781 L59.7344,59.1719 Q59.7344,60.4063 60.625,61.2344 Q61.5156,62.0469 63.1094,62.0469 Q64.0469,62.0469 64.7031,61.7969 Q65.0938,61.6406 65.5156,61.2031 Q65.7813,60.9375 65.9219,60.8594 Q66.0781,60.7813 66.2813,60.7813 Q66.6094,60.7813 66.8594,61.0469 Q67.125,61.2969 67.125,61.6406 Q67.125,61.9844 66.7813,62.3906 Q66.2813,62.9688 65.4844,63.2969 Q64.4063,63.75 63.1094,63.75 Q61.5938,63.75 60.3906,63.125 Q59.4063,62.625 58.7188,61.5625 Q58.0313,60.4844 58.0313,59.2031 L58.0313,58.0469 Q58.0313,56.7188 58.6406,55.5781 Q59.2656,54.4219 60.3594,53.8125 Q61.4531,53.1875 62.6875,53.1875 Q63.4219,53.1875 64.0625,53.3594 Q64.7188,53.5156 65.2656,53.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="76.5" y="63.7285">Thread</text><line style="stroke:#181818;stroke-width:0.5;" x1="48.5" x2="124.5" y1="74" y2="74"/><line style="stroke:#181818;stroke-width:0.5;" x1="48.5" x2="124.5" y1="82" y2="82"/></g><!--MD5=[3c51e208bd3358fd222445d47d0bbd09]
+reverse link GameManager to Server--><g id="link_GameManager_Server"><path codeLine="55" d="M369.51,279.5 C376.83,279.5 384.14,279.5 391.45,279.5 " fill="none" id="GameManager-backto-Server" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="356.34,279.5,362.34,283.5,368.34,279.5,362.34,275.5,356.34,279.5" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e238b9403837ef01e7d2ec256c92175d]
+reverse link Player to GameManager--><g id="link_Player_GameManager"><path codeLine="57" d="M278.5,138.42 C278.5,153.31 278.5,169.22 278.5,184.78 " fill="none" id="Player-backto-GameManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="278.5,125.07,274.5,131.07,278.5,137.07,282.5,131.07,278.5,125.07" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[bc85060d81f69f7e092728ccc21df61a]
+reverse link Ball to GameManager--><g id="link_Ball_GameManager"><path codeLine="58" d="M179.35,337.19 C186.56,337.47 193.77,336.78 200.98,335.11 " fill="none" id="Ball-backto-GameManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="166.38,335.62,171.858,340.3095,178.2937,337.0565,172.8157,332.367,166.38,335.62" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a600187c7dbac0c6ba7e0e9c55ff2924]
+reverse link GameManager to Ball--><g id="link_GameManager_Ball"><path codeLine="60" d="M188,221.94 C180.79,221.44 173.58,221.92 166.38,223.38 " fill="none" id="GameManager-backto-Ball" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="200.98,223.89,195.645,219.0384,189.1147,222.097,194.4497,226.9486,200.98,223.89" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[04a75b10401440e07231084321be0d92]
+link Ball to Vector--><g id="link_Ball_Vector"><path codeLine="61" d="M86.5,356.67 C86.5,377.7 86.5,400.28 86.5,420.48 " fill="none" id="Ball-to-Vector" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="86.5,433.7,90.5,427.7,86.5,421.7,82.5,427.7,86.5,433.7" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[481f2cb1274d9651e476186da87c2c3a]
+reverse link GameManager to MovementManager--><g id="link_GameManager_MovementManager"><path codeLine="63" d="M278.5,387.58 C278.5,410.81 278.5,433.66 278.5,451.22 " fill="none" id="GameManager-backto-MovementManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="278.5,374.28,274.5,380.28,278.5,386.28,282.5,380.28,278.5,374.28" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d6b9b4062e8eb4cd325564a6e853ef88]
+reverse link Thread to Ball--><g id="link_Thread_Ball"><path codeLine="65" d="M86.5,110.13 C86.5,136.66 86.5,171.42 86.5,202.46 " fill="none" id="Thread-backto-Ball" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="79.5,110.04,86.5,90.04,93.5,110.04,79.5,110.04" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6f509cbe32844fd0064498dcf7462593]
+@startuml Server_ClassDiagram
+
+    class Server{
+        +ServerSocket serverSocket
+        +int port
+        +boolean startGame
+        +GameManager game
+    }
+
+    class Ball{
+        -GameManager game
+        +Vector coordinate
+        +Vector speed
+        +boolean isHalf
+        +boolean isPotted
+        +int number
+    }
+
+    class Constants{
+        {static}+int ballMass
+        {static}+int ballRadius
+        {static}+int tableFriction
+    }
+
+    class GameManager{
+        -Player player1
+        -Player player2
+        -boolean turn
+        -boolean ballsMoving
+        -List<Ball> halfs
+        -List<Ball> fulls
+        -Ball eightBall
+        -Ball cueBall
+    }
+
+    class MovementManager{
+        -GameManager game
+    }
+
+    class Player{
+        -Socket clientSocket
+        -PrintWriter out
+        -BufferedReader in
+        +boolean hasHalf
+    }
+
+    class Vector{
+        +int x
+        +int y
+        +float m
+    }
+
+    'java classes
+    class Thread
+
+    GameManager *-right- Server
+
+    Player *- - GameManager
+    Ball *- - GameManager
+
+    GameManager *-right- Ball
+    Vector *-up- Ball
+
+    GameManager *- - MovementManager
+
+    Thread <|- - Ball
+@enduml
+
+@startuml Server_ClassDiagram
+
+    class Server{
+        +ServerSocket serverSocket
+        +int port
+        +boolean startGame
+        +GameManager game
+    }
+
+    class Ball{
+        -GameManager game
+        +Vector coordinate
+        +Vector speed
+        +boolean isHalf
+        +boolean isPotted
+        +int number
+    }
+
+    class Constants{
+        {static}+int ballMass
+        {static}+int ballRadius
+        {static}+int tableFriction
+    }
+
+    class GameManager{
+        -Player player1
+        -Player player2
+        -boolean turn
+        -boolean ballsMoving
+        -List<Ball> halfs
+        -List<Ball> fulls
+        -Ball eightBall
+        -Ball cueBall
+    }
+
+    class MovementManager{
+        -GameManager game
+    }
+
+    class Player{
+        -Socket clientSocket
+        -PrintWriter out
+        -BufferedReader in
+        +boolean hasHalf
+    }
+
+    class Vector{
+        +int x
+        +int y
+        +float m
+    }
+
+    class Thread
+
+    GameManager *-right- Server
+
+    Player *- - GameManager
+    Ball *- - GameManager
+
+    GameManager *-right- Ball
+    Vector *-up- Ball
+
+    GameManager *- - MovementManager
+
+    Thread <|- - Ball
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 19:01:30 CEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

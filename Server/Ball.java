@@ -4,7 +4,7 @@ public class Ball extends Thread {
     public Vector coordinate;
     public Vector speed; // direction and intesity
     public boolean isHalf;
-    public boolean isPotted;
+    public boolean isPotted; //used for cueBall and eightBall
     public int number;
     // Mass is equal for every ball
 
