@@ -3,4 +3,4 @@
 ## Server
 
 ### Class Diagram
-(https://github.com/BmmNdr/8Ball/blob/main/UML/ServerClassDiagram/out/UML/ServerClassDiagram/ServerClassDiagram/Server_ClassDiagram.svg)
+![](/UML/ServerClassDiagram/ServerClassDiagram/Server_ClassDiagram.svg)
