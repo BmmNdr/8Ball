@@ -2,9 +2,9 @@
 ## Client
 
 ### Class Diagram
-![](/UML/ServerClassDiagram/out/UML/ServerClassDiagram/ServerClassDiagram/Client_ClassDiagram.svg)
+![](/UML/out/Client_ClassDiagram.svg)
 
 ## Server
 
 ### Class Diagram
-![](/UML/ServerClassDiagram/out/UML/ServerClassDiagram/ServerClassDiagram/Server_ClassDiagram.svg)
+![](/UML/out/Server_ClassDiagram.svg)
