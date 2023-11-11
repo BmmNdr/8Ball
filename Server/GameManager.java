@@ -7,8 +7,8 @@ public class GameManager {
     Player player2 = null;
     boolean turn; // True --> Player 1 | False --> Player 2
     boolean ballsMoving;
-    List<Ball> halfs;
-    List<Ball> fulls;
+    List<Ball> halfs = new ArrayList<Ball>();
+    List<Ball> fulls = new ArrayList<Ball>();
     Ball eightBall;
     Ball cueBall;
 
@@ -18,22 +18,34 @@ public class GameManager {
 
         ballsMoving = false;
 
-        halfs = new ArrayList<Ball>();
-        fulls = new ArrayList<Ball>();
-        eightBall = new Ball(new Coord(50, 50), false, 8);
-        cueBall = new Ball(new Coord(100, 100), false, 0);
+        Coord[] balls = Constants.getBallsInitialPositions();
+
+        for (int i = 0; i < balls.length; i++) {
+            if(i == 0){
+                cueBall = new Ball(balls[i], true, i);
+            }
+            else if(i == 8){
+                eightBall = new Ball(balls[i], false, i);
+            }
+            else if(i % 2 == 0){ //TODO divide as in real life
+                fulls.add(new Ball(balls[i], false, i));
+            }
+            else {
+                halfs.add(new Ball(balls[i], true, i));
+            }
+        }
     }
 
     public boolean setPlayer(Player p) {
 
-        //TODO send player configs (table coordinates)
-        if (player1 == null) {
-            player1 = p;
-            return false;
-        }
-
-        player2 = p;
-        return true; // if both players are sets
+       //TODO send player configs (table coordinates and ball radius)
+       if (player1 == null) {
+           player1 = p;
+           return false;
+       }
+       
+       player2 = p;
+       return true; // if both players are sets
     }
 
     public void StartGame() {
@@ -67,7 +79,8 @@ public class GameManager {
 
     public void sendBallsPosition(){
         // create string with balls position
-        String toSend = "paint;";
+        //String toSend = "paint;";
+        String toSend = "";
 
         for (Ball b : fulls)
             toSend += b.toString() + ";";
@@ -81,7 +94,7 @@ public class GameManager {
 
         // pass string to player (they will send it to the client)
         player1.sendBallsPositions(toSend);
-        player2.sendBallsPositions(toSend);
+        //player2.sendBallsPositions(toSend);
     }
 
     public int checkEndGame() {

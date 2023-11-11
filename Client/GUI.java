@@ -13,7 +13,7 @@ public class GUI extends JFrame {
         this.balls = new ArrayList<Ball>();
 
 
-        setSize(800, 600);
+        setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create the button and text field
@@ -27,6 +27,9 @@ public class GUI extends JFrame {
         add(panel, BorderLayout.SOUTH);
 
         setVisible(true);
+
+
+        updateBalls(balls);
     }
 
     public void updateBalls(List<Ball> balls) {
@@ -40,16 +43,36 @@ public class GUI extends JFrame {
 
         // Draw the pool table
         g.setColor(new Color(0, 85, 54));
-        g.fillRect(50, 50, 700, 500);
+        g.fillRect(0, 0, 800, 400);
 
         // Draw the balls
         for (Ball ball : balls) {
             switch (ball.number) {
+                case 0: g.setColor(Color.WHITE); break;
                 case 1: g.setColor(Color.YELLOW); break;
-                // ... other cases ...
+                case 2: g.setColor(Color.BLUE); break;
+                case 3: g.setColor(Color.RED); break;
+                case 4: g.setColor(Color.MAGENTA); break;
+                case 5: g.setColor(Color.ORANGE); break;
+                case 6: g.setColor(Color.GREEN); break;
+                case 7: g.setColor(Color.GRAY); break;
+                case 8: g.setColor(Color.BLACK); break;
+                case 9: g.setColor(Color.YELLOW); break;
+                case 10: g.setColor(Color.BLUE); break;
+                case 11: g.setColor(Color.RED); break;
+                case 12: g.setColor(Color.MAGENTA); break;
+                case 13: g.setColor(Color.ORANGE); break;
+                case 14: g.setColor(Color.GREEN); break;
+                case 15: g.setColor(Color.GRAY); break;
                 default: g.setColor(Color.BLACK); break;
             }
-            g.fillOval(ball.x, ball.y, 10, 10);
+            g.fillOval(ball.x - 13, ball.y - 13, 26, 26);
+
+            if(ball.number != 0 && ball.number % 2 == 0){ //TODO divide as in real life
+                g.setColor(Color.WHITE);
+
+                g.fillOval(ball.x - 7, ball.y - 7, 13, 13);
+            }
         }
     }
 
