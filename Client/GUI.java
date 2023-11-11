@@ -47,7 +47,7 @@ public class GUI extends JFrame {
             switch (ball.number) {
                 case 1: g.setColor(Color.YELLOW); break;
                 // ... other cases ...
-                default: g.setColor(Color.WHITE); break;
+                default: g.setColor(Color.BLACK); break;
             }
             g.fillOval(ball.x, ball.y, 10, 10);
         }

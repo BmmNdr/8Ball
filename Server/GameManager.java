@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,9 +17,16 @@ public class GameManager {
         this.player2 = null;
 
         ballsMoving = false;
+
+        halfs = new ArrayList<Ball>();
+        fulls = new ArrayList<Ball>();
+        eightBall = new Ball(new Coord(50, 50), false, 8);
+        cueBall = new Ball(new Coord(100, 100), false, 0);
     }
 
     public boolean setPlayer(Player p) {
+
+        //TODO send player configs (table coordinates)
         if (player1 == null) {
             player1 = p;
             return false;
@@ -29,6 +37,9 @@ public class GameManager {
     }
 
     public void StartGame() {
+
+        sendBallsPosition();
+
         // Select random player to start
         this.turn = new Random().nextBoolean();
 
@@ -51,9 +62,26 @@ public class GameManager {
 
         // move cue ball
 
-        
-
         ballsMoving = true;
+    }
+
+    public void sendBallsPosition(){
+        // create string with balls position
+        String toSend = "paint;";
+
+        for (Ball b : fulls)
+            toSend += b.toString() + ";";
+
+        for (Ball b : halfs)
+            toSend += b.toString() + ";";
+
+        toSend += cueBall.toString() + ";";
+
+        toSend += eightBall.toString();
+
+        // pass string to player (they will send it to the client)
+        player1.sendBallsPositions(toSend);
+        player2.sendBallsPositions(toSend);
     }
 
     public int checkEndGame() {

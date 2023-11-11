@@ -1,18 +1,16 @@
 public class Vector {
-    public int x;
-    public int y;
-    public float m; // magnitude
+    public double angle;
+    public double speed; //magnitude
 
-    public Vector(int x, int y) {
-        this.x = x;
-        this.y = y;
-
-        this.m = 0;
+    Vector(){
+        angle = 0;
+        speed = 0;
     }
 
-    public Vector() {
-        this.x = 0;
-        this.y = 0;
-        this.m = 0;
+    public Coord getCoord(){
+        double dx = speed * Math.cos(angle);
+        double dy = speed * Math.sin(angle);
+
+        return new Coord(dx, dy);
     }
 }

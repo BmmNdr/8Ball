@@ -10,7 +10,7 @@ import java.util.List;
 public class GameClient {
     private Socket clientSocket;
     private PrintWriter out;
-    private BufferedReader in;
+    public BufferedReader in;
     private GUI GUI;
 
     public GameClient(GUI GUI) throws IOException {

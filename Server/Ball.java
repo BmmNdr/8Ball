@@ -1,24 +1,20 @@
-public class Ball extends Thread {
-
-    private GameManager game;
-    public Vector coordinate;
-    public Vector speed; // direction and intesity
+public class Ball {
+    public Coord coordinate;
+    public Vector velocity; // angle and intesity
     public boolean isHalf;
-    public boolean isPotted; //used for cueBall and eightBall
+    public boolean isPotted;
     public int number;
     // Mass is equal for every ball
 
-    public Ball(GameManager game, Vector coordinate, boolean isHalf, int number) {
-        this.game = game;
+    public Ball(Coord coordinate, boolean isHalf, int number) {
         this.coordinate = coordinate;
         this.isHalf = isHalf;
         this.number = number;
 
-        this.speed = new Vector();
+        this.velocity = new Vector();
     }
 
-    @Override
-    public void run() {
+    public void move() {
         // Move balls
 
         // Detects collision with other balls
@@ -26,6 +22,6 @@ public class Ball extends Thread {
 
     @Override
     public String toString() {
-        return Integer.toString(number) + "-" + Integer.toString(coordinate.x) + "-" + Integer.toString(coordinate.y);
+        return Integer.toString(number) + "-" + Long.toString(Math.round(coordinate.x)) + "-" + Long.toString(Math.round(coordinate.y));
     }
 }
