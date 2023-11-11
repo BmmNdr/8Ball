@@ -21,31 +21,27 @@ public class GameManager {
         Coord[] balls = Constants.getBallsInitialPositions();
 
         for (int i = 0; i < balls.length; i++) {
-            if(i == 0){
+            if (i == 0) {
                 cueBall = new Ball(balls[i], true, i);
-            }
-            else if(i == 8){
+            } else if (i == 8) {
                 eightBall = new Ball(balls[i], false, i);
-            }
-            else if(i % 2 == 0){ //TODO divide as in real life
+            } else if (i % 2 == 0) { // TODO divide as in real life
                 fulls.add(new Ball(balls[i], false, i));
-            }
-            else {
+            } else {
                 halfs.add(new Ball(balls[i], true, i));
             }
         }
     }
 
     public boolean setPlayer(Player p) {
-
-       //TODO send player configs (table coordinates and ball radius)
-       if (player1 == null) {
-           player1 = p;
-           return false;
-       }
-       
-       player2 = p;
-       return true; // if both players are sets
+        //TODO send player configs (table coordinates and ball radius)
+        if (player1 == null) {
+        player1 = p;
+        return false;
+        }
+    
+        player2 = p;
+        return true; // if both players are sets
     }
 
     public void StartGame() {
@@ -77,9 +73,9 @@ public class GameManager {
         ballsMoving = true;
     }
 
-    public void sendBallsPosition(){
+    public void sendBallsPosition() {
         // create string with balls position
-        //String toSend = "paint;";
+        // String toSend = "paint;";
         String toSend = "";
 
         for (Ball b : fulls)
@@ -94,7 +90,7 @@ public class GameManager {
 
         // pass string to player (they will send it to the client)
         player1.sendBallsPositions(toSend);
-        //player2.sendBallsPositions(toSend);
+        player2.sendBallsPositions(toSend);
     }
 
     public int checkEndGame() {

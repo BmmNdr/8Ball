@@ -9,6 +9,9 @@ public class GUI extends JFrame {
     private JButton button;
     private JTextField textField;
 
+    private Image offScreenImageDrawed;
+    private Graphics offScreenGraphicsDrawed;
+    
     public GUI() {
         this.balls = new ArrayList<Ball>();
 
@@ -17,11 +20,7 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create the button and text field
-        button = new JButton("Submit Move");
-        textField = new JTextField(20);
         JPanel panel = new JPanel();
-        panel.add(textField);
-        panel.add(button);
 
         // Add the panel to the frame
         add(panel, BorderLayout.SOUTH);
@@ -39,6 +38,20 @@ public class GUI extends JFrame {
 
     @Override
     public void paint(Graphics g) {
+        final Dimension d = getSize();
+        offScreenImageDrawed = createImage(d.width, d.height);
+
+        this.offScreenGraphicsDrawed = offScreenImageDrawed.getGraphics();
+        this.offScreenGraphicsDrawed.setColor(Color.white);
+        this.offScreenGraphicsDrawed.fillRect(0, 0, d.width, d.height);
+        /////////////////////
+        // Paint Offscreen //
+        /////////////////////
+        renderOffScreen(offScreenImageDrawed.getGraphics());
+        g.drawImage(offScreenImageDrawed, 0, 0, null);
+    }
+
+    public void renderOffScreen(Graphics g) {
         super.paint(g);
 
         // Draw the pool table
