@@ -50,6 +50,9 @@ public class GameManager {
         Vector cue = turn ? player1.yourTurn() : player2.yourTurn();
 
         // move cue ball
+
+        
+
         ballsMoving = true;
     }
 

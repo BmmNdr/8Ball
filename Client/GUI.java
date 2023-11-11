@@ -1,6 +1,7 @@
 // GUI.java
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends JFrame {
@@ -9,6 +10,9 @@ public class GUI extends JFrame {
     private JTextField textField;
 
     public GUI() {
+        this.balls = new ArrayList<Ball>();
+
+
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

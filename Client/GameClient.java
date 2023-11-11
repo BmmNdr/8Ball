@@ -20,9 +20,8 @@ public class GameClient {
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
-    public void receiveGameState() throws IOException {
-        String gameState = in.readLine();
-        String[] ballsData = gameState.split(" ");
+    public void receiveGameState(String gameState) throws IOException {
+        String[] ballsData = gameState.split(";");
         List<Ball> balls = new ArrayList<>();
 
         for (String ballData : ballsData) {

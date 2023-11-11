@@ -16,14 +16,8 @@ public class app {
         //TODO riceve un messaggio dal server, poi capisce cosa fare (se muovere le palline, attendere o inviare una mossa)...
 
         while (true) {
-            gameClient.receiveGameState(); //TODO ...quindi al receiveGameState invio una stringa con le palline in CSV
-
-            // Sleep for a bit to simulate the time it takes for a player to make a move
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            gameClient.receiveGameState(tmp); //TODO ...quindi al receiveGameState invio una stringa con le palline in CSV
+            //TODO evitare flickering
         }
     }
 }
