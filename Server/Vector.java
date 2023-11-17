@@ -2,6 +2,11 @@ public class Vector {
     public double angle;
     public double speed; //magnitude
 
+    public Vector(double angle, double speed) {
+        this.angle = Math.toRadians(angle);
+        this.speed = speed;
+    }
+
     Vector(){
         angle = 0;
         speed = 0;

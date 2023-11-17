@@ -32,4 +32,8 @@ public class Constants {
 
 			return balls;
 	}
+
+	static public int getRadius(){
+		return ballDiameter / 2;
+	}
 }

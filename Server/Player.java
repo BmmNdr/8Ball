@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 
 public class Player {
     private Socket clientSocket;
@@ -10,6 +11,7 @@ public class Player {
     private BufferedReader in;
 
     public boolean hasHalf;
+    public List<Ball> balls;
 
     public Player(Socket socket) throws IOException {
         clientSocket = socket;
