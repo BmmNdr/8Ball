@@ -1,6 +1,11 @@
+
 // GUI.java
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +16,11 @@ public class GUI extends JFrame {
 
     private Image offScreenImageDrawed;
     private Graphics offScreenGraphicsDrawed;
-    
+
+    public BufferedImage[] ballImages = new BufferedImage[16];
+
     public GUI() {
         this.balls = new ArrayList<Ball>();
-
 
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,8 +33,16 @@ public class GUI extends JFrame {
 
         setVisible(true);
 
-
-        updateBalls(balls);
+        // Load the images in the array
+        for (int i = 0; i < 16; i++) {
+            try {
+                File file = new File("../pool_assets/ball" + i + ".png");
+                System.out.println(file.getAbsolutePath());
+                ballImages[i] = ImageIO.read(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateBalls(List<Ball> balls) {
@@ -58,35 +72,14 @@ public class GUI extends JFrame {
         g.setColor(new Color(0, 85, 54));
         g.fillRect(0, 0, 800, 400);
 
-        // Draw the balls
+        // Draw the balls using the images
         for (Ball ball : balls) {
-            switch (ball.number) {
-                case 0: g.setColor(Color.WHITE); break;
-                case 1: g.setColor(Color.YELLOW); break;
-                case 2: g.setColor(Color.BLUE); break;
-                case 3: g.setColor(Color.RED); break;
-                case 4: g.setColor(Color.MAGENTA); break;
-                case 5: g.setColor(Color.ORANGE); break;
-                case 6: g.setColor(Color.GREEN); break;
-                case 7: g.setColor(Color.GRAY); break;
-                case 8: g.setColor(Color.BLACK); break;
-                case 9: g.setColor(Color.YELLOW); break;
-                case 10: g.setColor(Color.BLUE); break;
-                case 11: g.setColor(Color.RED); break;
-                case 12: g.setColor(Color.MAGENTA); break;
-                case 13: g.setColor(Color.ORANGE); break;
-                case 14: g.setColor(Color.GREEN); break;
-                case 15: g.setColor(Color.GRAY); break;
-                default: g.setColor(Color.BLACK); break;
-            }
-            g.fillOval(ball.x - 13, ball.y - 13, 26, 26);
-
-            if(ball.number != 0 && ball.number % 2 == 0){ //TODO divide as in real life
-                g.setColor(Color.WHITE);
-
-                g.fillOval(ball.x - 7, ball.y - 7, 13, 13);
-            }
+            g.drawImage(ballImages[ball.getNumber()], ball.getX(), ball.getY(), null);
         }
+
+        updateBalls(balls);
+
+
     }
 
     public JButton getButton() {
@@ -96,4 +89,4 @@ public class GUI extends JFrame {
     public String getPlayerMove() {
         return textField.getText();
     }
-}   
+}

@@ -9,4 +9,16 @@ public class Ball {
         this.x = x;
         this.y = y;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
