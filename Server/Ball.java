@@ -29,18 +29,18 @@ public class Ball extends Thread {
             coordinate.setX(coordinate.getX() + (this.getDX()));
             coordinate.setY(coordinate.getY() + (this.getDY()));
 
-            double scale = Math.pow(10, 2);
-            if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
-                if (velocity.speed < 0)
-                    velocity.speed += 0.01;
-                else
-                    velocity.speed -= 0.01;
-            }
-            else {
-                isMoving = false;
-                velocity.speed = 0;
-                velocity.angle = 0;
-            }
+            //double scale = Math.pow(10, 2);
+            //if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
+            //    if (velocity.speed < 0)
+            //        velocity.speed += 0.01;
+            //    else
+            //        velocity.speed -= 0.01;
+            //}
+            //else {
+            //    isMoving = false;
+            //    velocity.speed = 0;
+            //    velocity.angle = 0;
+            //}
 
             try {
                 Thread.sleep(10);

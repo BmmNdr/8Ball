@@ -10,7 +10,7 @@ public class CollisionCheck extends Thread {
     @Override
     public void run() {
         while (ballsMoving()) {
-            for (int i = 0; i <= balls.size() - 1; i++) {
+            for (int i = 0; i < balls.size() - 1; i++) {
                 for (int j = i + 1; j < balls.size(); j++) {
                     if (collideWith(balls.get(j), balls.get(i)))
                         resolveCollision(balls.get(j), balls.get(i));
@@ -37,7 +37,7 @@ public class CollisionCheck extends Thread {
         double ballDY = ball.getDY();
         boolean isMod = false;
 
-        if (ball.getX() - Constants.getRadius() <= 0 || ball.getX() + Constants.getRadius() >= Constants.tableWidth) {
+        if ( ball.getX() - Constants.getRadius() <= 0 || ball.getX() + Constants.getRadius() >= Constants.tableWidth /*&& !(ball.getY() - Constants.getRadius() > Constants.potDiameter / 2 && ball.getY() + Constants.getRadius() < (Constants.tableHeight - Constants.potDiameter / 2))*/) {
             ballDX *= -1;
             isMod = true;
         }

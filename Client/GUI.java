@@ -3,7 +3,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,12 +16,12 @@ public class GUI extends JFrame {
     private Image offScreenImageDrawed;
     private Graphics offScreenGraphicsDrawed;
 
-    public BufferedImage[] ballImages = new BufferedImage[16];
+    public Image[] ballImages = new Image[16];
 
     public GUI() {
         this.balls = new ArrayList<Ball>();
 
-        setSize(800, 400);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create the button and text field
@@ -37,8 +36,8 @@ public class GUI extends JFrame {
         for (int i = 0; i < 16; i++) {
             try {
                 File file = new File("./pool_assets/ball" + i + ".png");
-                //System.out.println(file.getAbsolutePath());
-                ballImages[i] = ImageIO.read(file);
+                // System.out.println(file.getAbsolutePath());
+                ballImages[i] = ImageIO.read(file).getScaledInstance(26, 26, Image.SCALE_DEFAULT);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -70,15 +69,14 @@ public class GUI extends JFrame {
 
         // Draw the pool table
         g.setColor(new Color(0, 85, 54));
-        g.fillRect(0, 0, 800, 400);
+        g.fillRect(100, 100, 800, 400);
 
         // Draw the balls using the images
         for (Ball ball : balls) {
-            g.drawImage(ballImages[ball.getNumber()], ball.getX(), ball.getY(), null);
+            g.drawImage(ballImages[ball.getNumber()], ball.getX() + 100 - 13, ball.getY() + 100 - 13, null);
         }
 
         updateBalls(balls);
-
 
     }
 
