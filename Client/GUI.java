@@ -36,8 +36,8 @@ public class GUI extends JFrame {
         // Load the images in the array
         for (int i = 0; i < 16; i++) {
             try {
-                File file = new File("../pool_assets/ball" + i + ".png");
-                System.out.println(file.getAbsolutePath());
+                File file = new File("./pool_assets/ball" + i + ".png");
+                //System.out.println(file.getAbsolutePath());
                 ballImages[i] = ImageIO.read(file);
             } catch (IOException e) {
                 e.printStackTrace();

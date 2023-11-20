@@ -9,7 +9,7 @@ public class CollisionCheck extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (ballsMoving()) {
             for (int i = 0; i <= balls.size() - 1; i++) {
                 for (int j = i + 1; j < balls.size(); j++) {
                     if (collideWith(balls.get(j), balls.get(i)))
@@ -20,6 +20,15 @@ public class CollisionCheck extends Thread {
 
             wallCollision(balls.get(balls.size() - 1));
         }
+    }
+
+    private boolean ballsMoving(){
+        for (Ball ball : balls) {
+            if(ball.isMoving)
+                return true;
+        }
+
+        return false;
     }
 
     private void wallCollision(Ball ball) {
@@ -60,6 +69,9 @@ public class CollisionCheck extends Thread {
 
     private void resolveCollision(Ball ball, Ball ball2) {
         // https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects
+
+        ball.isMoving = true;
+        ball2.isMoving = true;
 
         // Angoli di movimento
         double thisAngle = ball2.getAngle();

@@ -4,6 +4,8 @@ public class Ball extends Thread {
     public boolean isHalf;
     public boolean isPotted;
     public int number;
+    public boolean isMoving;
+    public boolean stop;
     // Mass is equal for every ball
 
     public Ball(Coord coordinate, boolean isHalf, int number) {
@@ -12,12 +14,16 @@ public class Ball extends Thread {
         this.number = number;
 
         this.velocity = new Vector();
+
+        isMoving = false;
     }
 
     @Override
     public void run() {
 
-        while (true) {
+        stop = false;
+        isMoving = true;
+        while (!stop) {
 
             // Move balls
             coordinate.setX(coordinate.getX() + (this.getDX()));
@@ -25,10 +31,15 @@ public class Ball extends Thread {
 
             double scale = Math.pow(10, 2);
             if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
-            if (velocity.speed < 0)
-            velocity.speed += 0.01;
-            else
-            velocity.speed -= 0.01;
+                if (velocity.speed < 0)
+                    velocity.speed += 0.01;
+                else
+                    velocity.speed -= 0.01;
+            }
+            else {
+                isMoving = false;
+                velocity.speed = 0;
+                velocity.angle = 0;
             }
 
             try {

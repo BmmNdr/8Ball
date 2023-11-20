@@ -84,19 +84,18 @@ public class GameManager {
 
     public void moveBalls() throws InterruptedException {
 
-        threadSend.start();
-
-        collisionCheck.start();
-
         for (Ball ball : balls) {
             ball.start();
         }
 
-        threadSend.join();
+        threadSend.start();
+        collisionCheck.start();
 
+        threadSend.join();
         collisionCheck.join();
 
         for (Ball ball : balls) {
+            ball.stop = true;
             ball.join();
         }
 

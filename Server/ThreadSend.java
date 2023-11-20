@@ -7,7 +7,7 @@ public class ThreadSend extends Thread{
 
     @Override
     public void run() {
-        while(true){
+        while(ballsMoving()){
             sendBallsPosition();
 
             try {
@@ -30,5 +30,14 @@ public class ThreadSend extends Thread{
         // pass string to player (they will send it to the client)
         game.player1.sendBallsPositions(toSend);
         // player2.sendBallsPositions(toSend);
+    }
+
+    private boolean ballsMoving(){
+        for (Ball ball : game.balls) {
+            if(ball.isMoving)
+                return true;
+        }
+
+        return false;
     }
 }
