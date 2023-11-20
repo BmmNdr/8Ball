@@ -25,7 +25,7 @@ public class GameClient {
         List<Ball> balls = new ArrayList<>();
 
         for (String ballData : ballsData) {
-            String[] parts = ballData.split("-");
+            String[] parts = ballData.split("_");
             int number = Integer.parseInt(parts[0]);
             int x = Integer.parseInt(parts[1]);
             int y = Integer.parseInt(parts[2]);

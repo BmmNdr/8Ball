@@ -1,8 +1,8 @@
 public class Constants {
     public static int ballMass = 0;
-    public static int ballDiameter = 26;
+    public static int ballDiameter = 20;
 
-	public static int potDiameter = 36;
+	public static int potDiameter = 50;
 
     public static int tableFriction = 0;
 

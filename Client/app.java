@@ -11,6 +11,7 @@ public class app {
         
         while (true) {
             String tmp = gameClient.in.readLine();
+            System.out.println(tmp);
             gameClient.receiveGameState(tmp); //TODO ...quindi al receiveGameState invio una stringa con le palline in CSV
         }
     }

@@ -22,25 +22,27 @@ public class Ball extends Thread {
     public void run() {
 
         stop = false;
-        isMoving = true;
-        while (!stop) {
+        isMoving = !isPotted;
+        while (!stop && !isPotted) {
 
             // Move balls
-            coordinate.setX(coordinate.getX() + (this.getDX()));
-            coordinate.setY(coordinate.getY() + (this.getDY()));
+            if (isMoving) {
+                coordinate.setX(coordinate.getX() + (this.getDX()));
+                coordinate.setY(coordinate.getY() + (this.getDY()));
+            }
 
-            //double scale = Math.pow(10, 2);
-            //if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
-            //    if (velocity.speed < 0)
-            //        velocity.speed += 0.01;
-            //    else
-            //        velocity.speed -= 0.01;
-            //}
-            //else {
-            //    isMoving = false;
-            //    velocity.speed = 0;
-            //    velocity.angle = 0;
-            //}
+            // double scale = Math.pow(10, 2);
+            // if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
+            // if (velocity.speed < 0)
+            // velocity.speed += 0.01;
+            // else
+            // velocity.speed -= 0.01;
+            // }
+            // else {
+            // isMoving = false;
+            // velocity.speed = 0;
+            // velocity.angle = 0;
+            // }
 
             try {
                 Thread.sleep(10);
@@ -53,8 +55,14 @@ public class Ball extends Thread {
 
     @Override
     public String toString() {
-        return Integer.toString(number) + "-" + Long.toString(Math.round(coordinate.x)) + "-"
-                + Long.toString(Math.round(coordinate.y));
+        String tmp = Integer.toString(number) + "_";
+
+        if (isPotted)
+            tmp += "-1_-1";
+        else
+            tmp += Long.toString(Math.round(coordinate.x)) + "_" + Long.toString(Math.round(coordinate.y));
+
+        return tmp;
     }
 
     public double getDX() {
@@ -95,5 +103,15 @@ public class Ball extends Thread {
 
     public double getSpeed() {
         return velocity.speed;
+    }
+
+    public void pot() {
+        isPotted = true;
+        coordinate.x = -Integer.MAX_VALUE;
+        coordinate.y = -Integer.MAX_VALUE;
+        isMoving = false;
+        velocity.speed = 0;
+        velocity.angle = 0;
+        stop = true;
     }
 }

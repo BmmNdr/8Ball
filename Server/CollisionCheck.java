@@ -11,20 +11,24 @@ public class CollisionCheck extends Thread {
     public void run() {
         while (ballsMoving()) {
             for (int i = 0; i < balls.size() - 1; i++) {
-                for (int j = i + 1; j < balls.size(); j++) {
-                    if (collideWith(balls.get(j), balls.get(i)))
-                        resolveCollision(balls.get(j), balls.get(i));
+
+                if (!balls.get(i).isPotted && balls.get(i).isMoving) {
+
+                    for (int j = i + 1; j < balls.size(); j++) {
+                        if (collideWith(balls.get(j), balls.get(i)))
+                            resolveCollision(balls.get(j), balls.get(i));
+                    }
+                    wallCollision(balls.get(i));
                 }
-                wallCollision(balls.get(i));
             }
 
             wallCollision(balls.get(balls.size() - 1));
         }
     }
 
-    private boolean ballsMoving(){
+    private boolean ballsMoving() {
         for (Ball ball : balls) {
-            if(ball.isMoving)
+            if (ball.isMoving)
                 return true;
         }
 
@@ -37,14 +41,28 @@ public class CollisionCheck extends Thread {
         double ballDY = ball.getDY();
         boolean isMod = false;
 
-        if ( ball.getX() - Constants.getRadius() <= 0 || ball.getX() + Constants.getRadius() >= Constants.tableWidth /*&& !(ball.getY() - Constants.getRadius() > Constants.potDiameter / 2 && ball.getY() + Constants.getRadius() < (Constants.tableHeight - Constants.potDiameter / 2))*/) {
-            ballDX *= -1;
-            isMod = true;
+        if (ball.getX() - Constants.getRadius() <= 0 || ball.getX() + Constants.getRadius() >= Constants.tableWidth) {
+            if (ball.getY() - Constants.getRadius() < (Constants.tableHeight - Constants.potDiameter / 2)
+                    && ball.getY() + Constants.getRadius() > Constants.potDiameter / 2) {
+                ballDX *= -1;
+                isMod = true;
+            } else {
+                ball.pot();
+            }
         }
 
         if (ball.getY() - Constants.getRadius() <= 0 || ball.getY() + Constants.getRadius() >= Constants.tableHeight) {
-            ballDY *= -1;
-            isMod = true;
+            if ((ball.getX() + Constants.getRadius() > Constants.potDiameter / 2 && ball.getX()
+                    - Constants.getRadius() < (Constants.tableWidth / 2) - (Constants.potDiameter / 2)) ||
+                    (ball.getX() + Constants.getRadius() > (Constants.tableWidth / 2) + (Constants.potDiameter / 2)
+                            && ball.getX()
+                                    - Constants.getRadius() < Constants.tableWidth
+                                            - (Constants.potDiameter / 2))) {
+                ballDY *= -1;
+                isMod = true;
+            } else {
+                ball.pot();
+            }
         }
 
         if (isMod) {
