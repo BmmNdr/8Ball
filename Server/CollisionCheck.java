@@ -1,22 +1,37 @@
 import java.util.List;
 
 public class CollisionCheck extends Thread {
-    List<Ball> balls;
+    private List<Ball> balls;
+
+    public Ball firstCueHit;
+    public Ball firstPot;
 
     public CollisionCheck(List<Ball> balls) {
         this.balls = balls;
+        this.firstCueHit = null;
+        this.firstPot = null;
     }
 
     @Override
     public void run() {
+
+        this.firstCueHit = null;
+        this.firstPot = null;
+
         while (ballsMoving()) {
+
             for (int i = 0; i < balls.size() - 1; i++) {
 
-                if (!balls.get(i).isPotted && balls.get(i).isMoving) {
+                if (!balls.get(i).isPotted) {
 
                     for (int j = i + 1; j < balls.size(); j++) {
-                        if (collideWith(balls.get(j), balls.get(i)))
+                        if (!balls.get(j).isPotted && collideWith(balls.get(j), balls.get(i))) {
                             resolveCollision(balls.get(j), balls.get(i));
+
+                            //if (i == 0 && this.firstCueHit == null) {
+                            //    firstCueHit = balls.get(j);
+                            //}
+                        }
                     }
                     wallCollision(balls.get(i));
                 }
@@ -47,7 +62,7 @@ public class CollisionCheck extends Thread {
                 ballDX *= -1;
                 isMod = true;
             } else {
-                ball.pot();
+                this.potRoutine(ball);
             }
         }
 
@@ -61,7 +76,7 @@ public class CollisionCheck extends Thread {
                 ballDY *= -1;
                 isMod = true;
             } else {
-                ball.pot();
+                this.potRoutine(ball);
             }
         }
 
@@ -147,6 +162,14 @@ public class CollisionCheck extends Thread {
 
             smallerBall.coordinate.setX(smallerBall.getX() - overlap * Math.cos(theta));
             smallerBall.coordinate.setY(smallerBall.getY() - overlap * Math.sin(theta));
+        }
+    }
+
+    private void potRoutine(Ball ball) {
+        ball.pot();
+
+        if (firstPot == null) {
+            firstPot = ball;
         }
     }
 }

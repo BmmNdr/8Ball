@@ -25,32 +25,32 @@ public class Ball extends Thread {
         isMoving = !isPotted;
         while (!stop && !isPotted) {
 
-            // Move balls
-            if (isMoving) {
-                coordinate.setX(coordinate.getX() + (this.getDX()));
-                coordinate.setY(coordinate.getY() + (this.getDY()));
+                // Move balls
+                if (isMoving) {
+                    coordinate.setX(coordinate.getX() + (this.getDX()));
+                    coordinate.setY(coordinate.getY() + (this.getDY()));
+                }
+
+                double scale = Math.pow(10, 2);
+                if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
+                    if (velocity.speed < 0)
+                        velocity.speed += 0.01;
+                    else
+                        velocity.speed -= 0.01;
+                } else {
+                    isMoving = false;
+                    velocity.speed = 0;
+                    velocity.angle = 0;
+                }
+
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
 
-            // double scale = Math.pow(10, 2);
-            // if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
-            // if (velocity.speed < 0)
-            // velocity.speed += 0.01;
-            // else
-            // velocity.speed -= 0.01;
-            // }
-            // else {
-            // isMoving = false;
-            // velocity.speed = 0;
-            // velocity.angle = 0;
-            // }
-
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
     }
 
     @Override

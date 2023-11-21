@@ -10,6 +10,9 @@ public class GameManager {
     CollisionCheck collisionCheck;
     ThreadSend threadSend;
 
+    boolean potInTurn = false;
+    boolean foulInTurn = false;
+
     GameManager() {
         this.player1 = null;
         this.player2 = null;
@@ -35,11 +38,10 @@ public class GameManager {
     }
 
     public boolean setPlayer(Player p) {
-        // TODO send player configs (table coordinates and ball radius)
+        // TODO send player configs?
         if (player1 == null) {
             player1 = p;
-            // return false;
-            return true; // TODO remove, only for debug
+            return false;
         }
 
         player2 = p;
@@ -48,12 +50,13 @@ public class GameManager {
 
     public void StartGame() {
 
+        // Sends initial balls positions
         sendBallsPosition();
 
         // Select random player to start
         this.turn = new Random().nextBoolean();
 
-        turn = true; // TODO remove, only for debug
+        
 
         // Set Balls position
         int winner = 0;
@@ -61,44 +64,117 @@ public class GameManager {
 
             Turn();
 
-            turn = !turn;
+            //If in the turn a foul happened or the player didn't pot any ball...
+            if(foulInTurn || !potInTurn)
+                turn = !turn; //...turn passes to the other player
 
             winner = checkEndGame();
         }
     }
 
     public void Turn() {
-        // At every turn, get cue direction and force
+        //Reset turn var
+        potInTurn = false;
+        foulInTurn = false;
+
+        // At every turn, get cue direction and force...
         Vector cue = turn ? player1.yourTurn() : player2.yourTurn();
 
-        // move cue ball
-        balls.get(0).velocity = new Vector(0, 5);
+        //...and set cue ball velocity (speed and direction)
+        balls.get(0).velocity = cue;
 
         try {
             moveBalls();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        }
+
+        //Checks if the first hitted ball has the player's type...
+        if (collisionCheck.firstCueHit != null) {
+            Boolean playerHasHalf = turn ? player1.hasHalf : player2.hasHalf;
+
+            //...if not, a foul has been committed
+            if (playerHasHalf != null && playerHasHalf != collisionCheck.firstCueHit.isHalf)
+                foulInTurn = true;
+        }
+
+        //If halfs and fulls are not set and a ball has been potted...
+        if (player1.hasHalf == null && collisionCheck.firstPot != null) {
+            //... the player in turn has the potted ball's type
+            if (turn) {
+                player1.hasHalf = collisionCheck.firstPot.isHalf;
+
+                for (int i = 1; i < 8; i++)
+                    player1.balls.add(balls.get(i));
+
+                player2.hasHalf = !collisionCheck.firstPot.isHalf;
+
+                for (int i = 9; i <= 15; i++)
+                    player2.balls.add(balls.get(i));
+
+            } else {
+                player2.hasHalf = collisionCheck.firstPot.isHalf;
+
+                for (int i = 1; i < 8; i++)
+                    player2.balls.add(balls.get(i));
+
+                player1.hasHalf = !collisionCheck.firstPot.isHalf;
+
+                for (int i = 9; i <= 15; i++)
+                    player1.balls.add(balls.get(i));
+            }
+        }
+
+        //Check if the cue ball has been potted (foul)
+        if (balls.get(0).isPotted) {
+            balls.get(0).coordinate = Constants.getBallsInitialPositions()[0];
+            foulInTurn = true;
+        }
+
+        //Removes potted balls from players' balls list
+        for (Ball ball : player1.balls) {
+            if (ball.isPotted) {
+                player1.balls.remove(ball);
+
+                if (turn)
+                    potInTurn = true;
+            }
+        }
+
+        for (Ball ball : player2.balls) {
+            if (ball.isPotted) {
+                player2.balls.remove(ball);
+
+                if (!turn)
+                    potInTurn = true;
+            }
         }
     }
 
     public void moveBalls() throws InterruptedException {
 
+        //Makes threads from runnable objects every time so i can "re-start" them
+
+        List<Thread> runnableBalls = new ArrayList<Thread>();
         for (Ball ball : balls) {
+            runnableBalls.add(new Thread(ball));
+        }
+
+        Thread runnablThreadSend = new Thread(threadSend);
+        Thread runnableCollisionCheck = new Thread(collisionCheck);
+
+        for (Thread ball : runnableBalls) {
             ball.start();
         }
 
-        threadSend.start();
-        collisionCheck.start();
+        runnableCollisionCheck.start();
+        runnablThreadSend.start();
 
-        threadSend.join();
-        collisionCheck.join();
+        runnablThreadSend.join();
+        runnableCollisionCheck.join();
 
-        for (Ball ball : balls) {
-            ball.stop = true;
-            ball.join();
+        for (Thread ball : runnableBalls) {
+            ball.stop();
         }
-
     }
 
     public void sendBallsPosition() {
@@ -111,7 +187,7 @@ public class GameManager {
 
         // pass string to player (they will send it to the client)
         player1.sendBallsPositions(toSend);
-        // player2.sendBallsPositions(toSend);
+        player2.sendBallsPositions(toSend);
     }
 
     public int checkEndGame() {
@@ -120,7 +196,18 @@ public class GameManager {
             return balls.get(0).isPotted ? 2 : 1;
         else if (player2.balls.isEmpty() && balls.get(8).isPotted)
             return balls.get(0).isPotted ? 1 : 2;
+        else if (balls.get(8).isPotted) //8 ball has been potted
+            return turn ? 1 : 2;
 
         return 0;
+    }
+
+    public boolean ballsMoving() {
+        for (Ball ball : balls) {
+            if (ball.isMoving)
+                return true;
+        }
+
+        return false;
     }
 }

@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -10,7 +11,7 @@ public class Player {
     private PrintWriter out;
     private BufferedReader in;
 
-    public boolean hasHalf;
+    public Boolean hasHalf;
     public List<Ball> balls;
 
     public Player(Socket socket) throws IOException {
@@ -18,30 +19,14 @@ public class Player {
 
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+        balls = new ArrayList<Ball>();
     }
 
-    public void test() {
-        String str;
-        try {
-
-            str = in.readLine();
-
-            System.out.println(str);
-
-            out.println("Hello Client");
-
-            in.close();
-            out.close();
-            clientSocket.close();
-
-        } catch (IOException e) {
-        }
-    }
-
-    // Your turn method, returs cue direction and power (Vector??)
+    // Your turn method, returs cue direction and power (cue ball speed and angle)
     public Vector yourTurn() { // TODO
 
-        return new Vector();
+        return new Vector(0, 5);
     }
 
     public void sendBallsPositions(String position) {

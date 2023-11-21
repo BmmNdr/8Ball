@@ -13,8 +13,6 @@ public class ThreadSend extends Thread{
             try {
                 Thread.sleep(33);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
         }
     }
@@ -29,7 +27,7 @@ public class ThreadSend extends Thread{
 
         // pass string to player (they will send it to the client)
         game.player1.sendBallsPositions(toSend);
-        // player2.sendBallsPositions(toSend);
+        game.player2.sendBallsPositions(toSend);
     }
 
     private boolean ballsMoving(){
