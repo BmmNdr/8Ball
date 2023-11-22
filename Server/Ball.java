@@ -21,7 +21,6 @@ public class Ball extends Thread {
 
     @Override
     public void run() {
-        stop = false;
         isMoving = !isPotted;
         while (!isPotted && !stop) {
 
@@ -29,28 +28,89 @@ public class Ball extends Thread {
             if (isMoving) {
                 coordinate.setX(coordinate.getX() + (this.getDX()));
                 coordinate.setY(coordinate.getY() + (this.getDY()));
-            }
 
-            double scale = Math.pow(10, 2);
-            if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
-                if (velocity.speed < 0)
-                    velocity.speed += 0.01;
-                else
-                    velocity.speed -= 0.01;
-            } else {
-                isMoving = false;
-                velocity.speed = 0;
-                velocity.angle = 0;
+                double scale = Math.pow(10, 2);
+                if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
+                    if (velocity.speed < 0)
+                        velocity.speed += 0.01;
+                    else
+                        velocity.speed -= 0.01;
+                } else {
+                    isMoving = false;
+                    velocity.speed = 0;
+                    velocity.angle = 0;
+                }
+
+                checkPot();
+                wallCollision();
             }
 
             try {
-                Thread.sleep(20);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
         }
 
+    }
+
+    private void checkPot() {
+        // TODO check if ball center is inside the pot circle
+        // Serach for point inside a circle
+
+        for (Coord pot : Constants.potsPositions) {
+            if (this.coordinate.distance(pot) < Constants.potDiameter / 2) {
+                pot();
+
+                System.out.println("Potted Ball " + Integer.toString(this.number));
+
+                break;
+            }
+        }
+    }
+
+    private void wallCollision() {
+
+        double ballDX = this.getDX();
+        double ballDY = this.getDY();
+        boolean isMod = false;
+
+        if (this.getX() - Constants.getRadius() <= 0 || this.getX() + Constants.getRadius() >= Constants.tableWidth) {
+
+            if (this.getY() - Constants.getRadius() < (Constants.tableHeight - Constants.potDiameter / 2)
+                    && this.getY() + Constants.getRadius() > Constants.potDiameter / 2) {
+                ballDX *= -1;
+                isMod = true;
+            }
+        }
+
+        if (this.getY() - Constants.getRadius() <= 0 || this.getY() + Constants.getRadius() >= Constants.tableHeight) {
+            if ((this.getX() + Constants.getRadius() > Constants.potDiameter / 2 && this.getX()
+                    - Constants.getRadius() < (Constants.tableWidth / 2) - (Constants.potDiameter / 2)) ||
+                    (this.getX() + Constants.getRadius() > (Constants.tableWidth / 2) + (Constants.potDiameter / 2)
+                            && this.getX()
+                                    - Constants.getRadius() < Constants.tableWidth
+                                            - (Constants.potDiameter / 2))) {
+                ballDY *= -1;
+                isMod = true;
+            }
+        }
+
+        if (isMod) {
+            this.setAngle(ballDX, ballDY);
+            this.setMagnitude(ballDX, ballDY);
+        }
+
+        if (this.getY() + Constants.getRadius() > Constants.tableHeight)
+            this.coordinate.setY(Constants.tableHeight - Constants.getRadius());
+        else if (this.getY() - Constants.getRadius() < 0)
+            this.coordinate.setY(Constants.getRadius());
+
+        if (this.getX() + Constants.getRadius() > Constants.tableWidth)
+            this.coordinate.setX(Constants.tableWidth - Constants.getRadius());
+        else if (this.getX() - Constants.getRadius() < 0)
+            this.coordinate.setX(Constants.getRadius());
     }
 
     @Override
@@ -112,5 +172,6 @@ public class Ball extends Thread {
         isMoving = false;
         velocity.speed = 0;
         velocity.angle = 0;
+        stop = true;
     }
 }

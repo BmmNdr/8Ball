@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -43,10 +44,13 @@ public class GameManager {
         // TODO send player configs?
         if (player1 == null) {
             player1 = p;
+
+            System.out.println("Player 1 Connected");
             return debugMode;
         }
 
         player2 = p;
+        System.out.println("Player 2 Connected");
         return true; // if both players are sets
     }
 
@@ -96,8 +100,13 @@ public class GameManager {
             Boolean playerHasHalf = turn ? player1.hasHalf : player2.hasHalf;
 
             // ...if not, a foul has been committed
-            if (playerHasHalf != null && playerHasHalf != collisionCheck.firstCueHit.isHalf)
+            if (playerHasHalf != null && playerHasHalf != collisionCheck.firstCueHit.isHalf) {
                 foulInTurn = true;
+                System.out.println("First Hit Foul");
+            }
+        } else {// no ball hitted, foul
+            foulInTurn = true;
+            System.out.println("No ball hitted, foul");
         }
 
         // If halfs and fulls are not set and a ball has been potted...
@@ -109,34 +118,49 @@ public class GameManager {
                 for (int i = 1; i < 8; i++)
                     player1.balls.add(balls.get(i));
 
-                player2.hasHalf = !collisionCheck.firstPot.isHalf;
+                if (!debugMode) {
+                    player2.hasHalf = !collisionCheck.firstPot.isHalf;
 
-                for (int i = 9; i <= 15; i++)
-                    player2.balls.add(balls.get(i));
+                    for (int i = 9; i <= 15; i++)
+                        player2.balls.add(balls.get(i));
+                }
 
             } else {
-                player2.hasHalf = collisionCheck.firstPot.isHalf;
 
-                for (int i = 1; i < 8; i++)
-                    player2.balls.add(balls.get(i));
+                if (!debugMode) {
+                    player2.hasHalf = collisionCheck.firstPot.isHalf;
+
+                    for (int i = 1; i < 8; i++)
+                        player2.balls.add(balls.get(i));
+                }
 
                 player1.hasHalf = !collisionCheck.firstPot.isHalf;
 
                 for (int i = 9; i <= 15; i++)
                     player1.balls.add(balls.get(i));
             }
+
+            System.out.println("Player 1 has " + (player1.hasHalf ? "halfs" : "fulls"));
+
+            if (!debugMode)
+                System.out.println("Player 2 has " + (player2.hasHalf ? "halfs" : "fulls"));
         }
 
         // Check if the cue ball has been potted (foul)
         if (balls.get(0).isPotted) {
             balls.get(0).coordinate = Constants.getBallsInitialPositions()[0];
+            balls.get(0).isPotted = false;
             foulInTurn = true;
+
+            System.out.println("Cue Ball Potted, foul");
         }
 
         // Removes potted balls from players' balls list
-        for (Ball ball : player1.balls) {
+        for (Iterator<Ball> it = player1.balls.iterator(); it.hasNext();) {
+            Ball ball = it.next();
+
             if (ball.isPotted) {
-                player1.balls.remove(ball);
+                it.remove();
 
                 if (turn)
                     potInTurn = true;
@@ -144,11 +168,13 @@ public class GameManager {
         }
 
         if (!debugMode) {
-            for (Ball ball : player2.balls) {
-                if (ball.isPotted) {
-                    player2.balls.remove(ball);
+            for (Iterator<Ball> it = player2.balls.iterator(); it.hasNext();) {
+                Ball ball = it.next();
 
-                    if (!turn)
+                if (ball.isPotted) {
+                    it.remove();
+
+                    if (turn)
                         potInTurn = true;
                 }
             }
@@ -158,7 +184,6 @@ public class GameManager {
     public void moveBalls() throws InterruptedException {
 
         // Makes threads from runnable objects every time so i can "re-start" them
-
         List<Thread> runnableBalls = new ArrayList<Thread>();
         for (Ball ball : balls) {
             runnableBalls.add(new Thread(ball));
@@ -166,6 +191,10 @@ public class GameManager {
 
         Thread runnablThreadSend = new Thread(threadSend);
         Thread runnableCollisionCheck = new Thread(collisionCheck);
+
+        for (Ball ball : balls) {
+            ball.stop = false;
+        }
 
         for (Thread ball : runnableBalls) {
             ball.start();
@@ -182,6 +211,7 @@ public class GameManager {
         }
 
         for (Thread ball : runnableBalls) {
+            // ball.stop(); //Brutal Method
             ball.join();
         }
     }
@@ -208,7 +238,7 @@ public class GameManager {
         else if (!debugMode && player2.balls.isEmpty() && balls.get(8).isPotted)
             return balls.get(0).isPotted ? 1 : 2;
         else if (balls.get(8).isPotted) // 8 ball has been potted
-            return turn ? 1 : 2;
+            return turn ? 2 : 1;
 
         return 0;
     }

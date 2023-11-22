@@ -33,28 +33,34 @@ public class CollisionCheck extends Thread {
                             }
                         }
                     }
-                    wallCollision(balls.get(i));
-                    checkPot(balls.get(i));
+                    //wallCollision(balls.get(i));
+                    // checkPot(balls.get(i));
+                }
+                else if(firstPot == null){
+                    firstPot = balls.get(i);
                 }
             }
 
-            wallCollision(balls.get(balls.size() - 1));
-            checkPot(balls.get(balls.size() - 1));
+            //wallCollision(balls.get(balls.size() - 1));
+            // checkPot(balls.get(balls.size() - 1));
         }
     }
 
-    private void checkPot(Ball ball) {
-        // TODO check if ball center is inside the pot circle
-        // Serach for point inside a circle
-
-        for (Coord pot : Constants.potsPositions) {
-            if (ball.coordinate.distance(pot) < Constants.potDiameter / 2) {
-                potRoutine(ball);
-                break;
-            }
-        }
-
-    }
+    // private void checkPot(Ball ball) {
+    // // TODO check if ball center is inside the pot circle
+    // // Serach for point inside a circle
+    //
+    // for (Coord pot : Constants.potsPositions) {
+    // if (ball.coordinate.distance(pot) < Constants.potDiameter / 2) {
+    // potRoutine(ball);
+    //
+    // System.out.println("Potted Ball " + Integer.toString(ball.number));
+    //
+    // break;
+    // }
+    // }
+    //
+    // }
 
     private boolean ballsMoving() {
         for (Ball ball : balls) {
@@ -65,48 +71,54 @@ public class CollisionCheck extends Thread {
         return false;
     }
 
-    private void wallCollision(Ball ball) {
-
-        double ballDX = ball.getDX();
-        double ballDY = ball.getDY();
-        boolean isMod = false;
-
-        if (ball.getX() - Constants.getRadius() <= 0 || ball.getX() + Constants.getRadius() >= Constants.tableWidth) {
-
-            if (ball.getY() - Constants.getRadius() < (Constants.tableHeight - Constants.potDiameter / 2)
-                    && ball.getY() + Constants.getRadius() > Constants.potDiameter / 2) {
-                ballDX *= -1;
-                isMod = true;
-            }
-        }
-
-        if (ball.getY() - Constants.getRadius() <= 0 || ball.getY() + Constants.getRadius() >= Constants.tableHeight) {
-            if ((ball.getX() + Constants.getRadius() > Constants.potDiameter / 2 && ball.getX()
-                    - Constants.getRadius() < (Constants.tableWidth / 2) - (Constants.potDiameter / 2)) ||
-                    (ball.getX() + Constants.getRadius() > (Constants.tableWidth / 2) + (Constants.potDiameter / 2)
-                            && ball.getX()
-                                    - Constants.getRadius() < Constants.tableWidth
-                                            - (Constants.potDiameter / 2))) {
-                ballDY *= -1;
-                isMod = true;
-            }
-        }
-
-        if (isMod) {
-            ball.setAngle(ballDX, ballDY);
-            ball.setMagnitude(ballDX, ballDY);
-        }
-
-        if (ball.getY() + Constants.getRadius() > Constants.tableHeight)
-            ball.coordinate.setY(Constants.tableHeight - Constants.getRadius());
-        else if (ball.getY() - Constants.getRadius() < 0)
-            ball.coordinate.setY(Constants.getRadius());
-
-        if (ball.getX() + Constants.getRadius() > Constants.tableWidth)
-            ball.coordinate.setX(Constants.tableWidth - Constants.getRadius());
-        else if (ball.getX() - Constants.getRadius() < 0)
-            ball.coordinate.setX(Constants.getRadius());
-    }
+    // private void wallCollision(Ball ball) {
+    //
+    // double ballDX = ball.getDX();
+    // double ballDY = ball.getDY();
+    // boolean isMod = false;
+    //
+    // if (ball.getX() - Constants.getRadius() <= 0 || ball.getX() +
+    // Constants.getRadius() >= Constants.tableWidth) {
+    //
+    // if (ball.getY() - Constants.getRadius() < (Constants.tableHeight -
+    // Constants.potDiameter / 2)
+    // && ball.getY() + Constants.getRadius() > Constants.potDiameter / 2) {
+    // ballDX *= -1;
+    // isMod = true;
+    // }
+    // }
+    //
+    // if (ball.getY() - Constants.getRadius() <= 0 || ball.getY() +
+    // Constants.getRadius() >= Constants.tableHeight) {
+    // if ((ball.getX() + Constants.getRadius() > Constants.potDiameter / 2 &&
+    // ball.getX()
+    // - Constants.getRadius() < (Constants.tableWidth / 2) - (Constants.potDiameter
+    // / 2)) ||
+    // (ball.getX() + Constants.getRadius() > (Constants.tableWidth / 2) +
+    // (Constants.potDiameter / 2)
+    // && ball.getX()
+    // - Constants.getRadius() < Constants.tableWidth
+    // - (Constants.potDiameter / 2))) {
+    // ballDY *= -1;
+    // isMod = true;
+    // }
+    // }
+    //
+    // if (isMod) {
+    // ball.setAngle(ballDX, ballDY);
+    // ball.setMagnitude(ballDX, ballDY);
+    // }
+    //
+    // if (ball.getY() + Constants.getRadius() > Constants.tableHeight)
+    // ball.coordinate.setY(Constants.tableHeight - Constants.getRadius());
+    // else if (ball.getY() - Constants.getRadius() < 0)
+    // ball.coordinate.setY(Constants.getRadius());
+    //
+    // if (ball.getX() + Constants.getRadius() > Constants.tableWidth)
+    // ball.coordinate.setX(Constants.tableWidth - Constants.getRadius());
+    // else if (ball.getX() - Constants.getRadius() < 0)
+    // ball.coordinate.setX(Constants.getRadius());
+    // }
 
     private boolean collideWith(Ball ball, Ball ball2) {
         return ball2.coordinate.distance(ball.coordinate) < Constants.getRadius() + Constants.getRadius();
@@ -177,11 +189,11 @@ public class CollisionCheck extends Thread {
         }
     }
 
-    private void potRoutine(Ball ball) {
-        ball.pot();
-
-        if (firstPot == null) {
-            firstPot = ball;
-        }
-    }
+    //private void potRoutine(Ball ball) {
+    //    ball.pot();
+//
+    //    if (firstPot == null) {
+    //        firstPot = ball;
+    //    }
+    //}
 }
