@@ -1,67 +1,124 @@
-@startuml Server_ClassDiagram
+@startuml Server
 
-    class Server{
-        +ServerSocket serverSocket
-        +int port
-        +boolean startGame
-        +GameManager game
-    }
+top to bottom direction
 
-    class Ball{
-        -GameManager game
-        +Vector coordinate
-        +Vector speed
-        +boolean isHalf
-        +boolean isPotted
-        +int number
-    }
+class Ball {
+  + Ball(Coord, boolean, int): 
+  + isPotted: boolean
+  + coordinate: Coord
+  + isHalf: boolean
+  + velocity: Vector
+  + number: int
+  + stop: boolean
+  + isMoving: boolean
+  + setX(double): void
+  + getY(): double
+  + getSpeed(): double
+  + pot(): void
+  + toString(): String
+  + getDX(): double
+  + setMagnitude(double, double): void
+  + getX(): double
+  + setAngle(double, double): void
+  + getAngle(): double
+  + run(): void
+  + setY(double): void
+  + getDY(): double
+}
+class CollisionCheck {
+  + CollisionCheck(List<Ball>): 
+  + firstPot: Ball
+  - balls: List<Ball>
+  + firstCueHit: Ball
+  - resolveCollision(Ball, Ball): void
+  - collideWith(Ball, Ball): boolean
+  - ballsMoving(): boolean
+  + run(): void
+  - resolveOverlap(Ball, Ball): void
+  - wallCollision(Ball): void
+  - potRoutine(Ball): void
+}
+class Constants {
+  + Constants(): 
+  + tableWidth: int
+  + ballDiameter: int
+  + ballMass: int
+  + tableFriction: int
+  + tableHeight: int
+  + table: Coord
+  + potDiameter: int
+  + getBallsInitialPositions(): Coord[]
+  + getRadius(): int
+}
+class Coord {
+  + Coord(double, double): 
+  + y: double
+  + x: double
+  + getY(): double
+  + setY(double): void
+  + distance(Coord): double
+  + getX(): double
+  + setX(double): void
+}
+class GameManager {
+  ~ GameManager(): 
+  ~ player1: Player
+  ~ player2: Player
+  ~ collisionCheck: CollisionCheck
+  ~ potInTurn: boolean
+  ~ foulInTurn: boolean
+  ~ turn: boolean
+  ~ balls: List<Ball>
+  ~ threadSend: ThreadSend
+  + setPlayer(Player): boolean
+  + moveBalls(): void
+  + checkEndGame(): int
+  + Turn(): void
+  + ballsMoving(): boolean
+  + sendBallsPosition(): void
+  + StartGame(): void
+}
+class Player {
+  + Player(Socket): 
+  - out: PrintWriter
+  + balls: List<Ball>
+  - clientSocket: Socket
+  + hasHalf: Boolean
+  - in: BufferedReader
+  + yourTurn(): Vector
+  + sendBallsPositions(String): void
+}
+class ThreadSend {
+  + ThreadSend(GameManager): 
+  ~ game: GameManager
+  - ballsMoving(): boolean
+  + run(): void
+  + sendBallsPosition(): void
+}
+class Vector {
+  + Vector(double, double): 
+  ~ Vector(): 
+  + angle: double
+  + speed: double
+  + getCoord(): Coord
+}
+class server {
+  + server(): 
+  + main(String[]): void
 
-    class Constants{
-        {static}+int ballMass
-        {static}+int ballRadius
-        {static}+int tableFriction
-    }
+  + game: GameManager
+}
 
-    class GameManager{
-        -Player player1
-        -Player player2
-        -boolean turn
-        -boolean ballsMoving
-        -List<Ball> halfs
-        -List<Ball> fulls
-        -Ball eightBall
-        -Ball cueBall
-    }
+Ball           "1" *-[#595959,plain]-> "coordinate\n1" Coord          
+Ball           "1" *-[#595959,plain]-> "velocity\n1" Vector         
+CollisionCheck "1" *-[#595959,plain]-> "balls\n*" Ball           
+Constants      "1" *-[#595959,plain]-> "table\n1" Coord          
+GameManager    "1" *-[#595959,plain]-> "balls\n*" Ball           
+GameManager    "1" *-[#595959,plain]-> "collisionCheck\n1" CollisionCheck 
+GameManager    "1" *-[#595959,plain]-> "player1\n1" Player         
+GameManager    "1" *-[#595959,plain]-> "threadSend\n1" ThreadSend     
+Player         "1" *-[#595959,plain]-> "balls\n*" Ball           
+ThreadSend     "1" *-[#595959,plain]-> "game\n1" GameManager    
+server "1" *--> "game\n1" GameManager
 
-    class MovementManager{
-        -GameManager game
-    }
-
-    class Player{
-        -Socket clientSocket
-        -PrintWriter out
-        -BufferedReader in
-        +boolean hasHalf
-    }
-
-    class Vector{
-        +int x
-        +int y
-        +float m
-    }
-
-    'java classes
-    class Thread
-
-    GameManager *-right- Server
-
-    Player *-- GameManager
-    Ball *-- GameManager
-
-    GameManager *-right- Ball
-    Vector *-up- Ball
-
-    GameManager *-- MovementManager
-
-    Thread <|-- Ball
 @enduml
