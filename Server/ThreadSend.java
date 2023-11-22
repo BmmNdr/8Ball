@@ -19,8 +19,7 @@ public class ThreadSend extends Thread {
 
     public void sendBallsPosition() {
         // create string with balls position
-        // String toSend = "paint;";
-        String toSend = "";
+        String toSend = "paint;";
 
         for (Ball b : game.balls)
             toSend += b.toString() + ";";
