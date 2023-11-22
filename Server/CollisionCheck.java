@@ -28,17 +28,32 @@ public class CollisionCheck extends Thread {
                         if (!balls.get(j).isPotted && collideWith(balls.get(j), balls.get(i))) {
                             resolveCollision(balls.get(j), balls.get(i));
 
-                            //if (i == 0 && this.firstCueHit == null) {
-                            //    firstCueHit = balls.get(j);
-                            //}
+                            if (i == 0 && this.firstCueHit == null) {
+                                firstCueHit = balls.get(j);
+                            }
                         }
                     }
                     wallCollision(balls.get(i));
+                    checkPot(balls.get(i));
                 }
             }
 
             wallCollision(balls.get(balls.size() - 1));
+            checkPot(balls.get(balls.size() - 1));
         }
+    }
+
+    private void checkPot(Ball ball) {
+        // TODO check if ball center is inside the pot circle
+        // Serach for point inside a circle
+
+        for (Coord pot : Constants.potsPositions) {
+            if (ball.coordinate.distance(pot) < Constants.potDiameter / 2) {
+                potRoutine(ball);
+                break;
+            }
+        }
+
     }
 
     private boolean ballsMoving() {
@@ -57,12 +72,11 @@ public class CollisionCheck extends Thread {
         boolean isMod = false;
 
         if (ball.getX() - Constants.getRadius() <= 0 || ball.getX() + Constants.getRadius() >= Constants.tableWidth) {
+
             if (ball.getY() - Constants.getRadius() < (Constants.tableHeight - Constants.potDiameter / 2)
                     && ball.getY() + Constants.getRadius() > Constants.potDiameter / 2) {
                 ballDX *= -1;
                 isMod = true;
-            } else {
-                this.potRoutine(ball);
             }
         }
 
@@ -75,8 +89,6 @@ public class CollisionCheck extends Thread {
                                             - (Constants.potDiameter / 2))) {
                 ballDY *= -1;
                 isMod = true;
-            } else {
-                this.potRoutine(ball);
             }
         }
 

@@ -1,4 +1,4 @@
-public class ThreadSend extends Thread{
+public class ThreadSend extends Thread {
     GameManager game;
 
     public ThreadSend(GameManager game) {
@@ -7,7 +7,7 @@ public class ThreadSend extends Thread{
 
     @Override
     public void run() {
-        while(ballsMoving()){
+        while (ballsMoving()) {
             sendBallsPosition();
 
             try {
@@ -16,7 +16,7 @@ public class ThreadSend extends Thread{
             }
         }
     }
-    
+
     public void sendBallsPosition() {
         // create string with balls position
         // String toSend = "paint;";
@@ -27,12 +27,14 @@ public class ThreadSend extends Thread{
 
         // pass string to player (they will send it to the client)
         game.player1.sendBallsPositions(toSend);
-        game.player2.sendBallsPositions(toSend);
+
+        if (!game.debugMode)
+            game.player2.sendBallsPositions(toSend);
     }
 
-    private boolean ballsMoving(){
+    private boolean ballsMoving() {
         for (Ball ball : game.balls) {
-            if(ball.isMoving)
+            if (ball.isMoving)
                 return true;
         }
 
