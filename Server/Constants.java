@@ -1,10 +1,10 @@
 public class Constants {
-	public static int ballMass = 0;
+	public static double ballMass = Math.pow(Constants.getRadius(), 3);
 	public static int ballDiameter = 20;
 
 	public static int potDiameter = 50;
 
-	public static int tableFriction = 0;
+	public static double tableFriction = 0.01;
 
 	public static Coord table = new Coord(50, 50);
 	public static int tableWidth = 800;

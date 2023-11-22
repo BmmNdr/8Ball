@@ -1,0 +1,24 @@
+//Turno del giocatore (tra parentesi il tipo di palla che puo' avere)
+Server: turn;{null,full,half}
+Client: angle;speed
+
+//Turno dell'altro giocatore
+Server: wait;
+
+//Posizione delle palline
+Server: paint;nBall_PosX_PosY;...;nBall_PosX_PosY
+
+//Fine Gioco (0 --> Perso | 1 --> Vinto) 
+Server: end;{0-1}
+
+
+
+//Da aggiungere se si fa in tempo
+
+//Invio configurazioni alla connessione del giocatore
+Client --> Si connette
+Server: config;raggioPallina;LunghezzaTavolo;DiametroBuca;
+
+
+//Notifica del fallo
+Server: foul;messaggioFallo

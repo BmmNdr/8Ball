@@ -32,9 +32,9 @@ public class Ball extends Thread {
                 double scale = Math.pow(10, 2);
                 if ((Math.round(velocity.speed * scale) / scale) != 0.00) {
                     if (velocity.speed < 0)
-                        velocity.speed += 0.01;
+                        velocity.speed += Constants.tableFriction;
                     else
-                        velocity.speed -= 0.01;
+                        velocity.speed -= Constants.tableFriction;
                 } else {
                     isMoving = false;
                     velocity.speed = 0;
