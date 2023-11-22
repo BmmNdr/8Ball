@@ -77,6 +77,14 @@ public class GameManager {
 
             winner = checkEndGame();
         }
+
+        if (winner == 1) {
+            player1.win();
+            player2.lose();
+        } else if (winner == 2) {
+            player1.lose();
+            player2.win();
+        }
     }
 
     public void Turn() {
@@ -84,7 +92,12 @@ public class GameManager {
         potInTurn = false;
         foulInTurn = false;
 
-        // At every turn, get cue direction and force...
+        // At every turn, get cue direction and force while the other player waits
+        if (turn)
+            player2.pWait();
+        else
+            player1.pWait();
+
         Vector cue = turn ? player1.yourTurn() : player2.yourTurn();
 
         // ...and set cue ball velocity (speed and direction)
@@ -218,8 +231,7 @@ public class GameManager {
 
     public void sendBallsPosition() {
         // create string with balls position
-        // String toSend = "paint;";
-        String toSend = "";
+        String toSend = "paint;";
 
         for (Ball b : balls)
             toSend += b.toString() + ";";

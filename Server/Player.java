@@ -26,7 +26,39 @@ public class Player {
     // Your turn method, returs cue direction and power (cue ball speed and angle)
     public Vector yourTurn() { // TODO
 
-        return new Vector(0, 5);
+        String ballType;
+
+        if (hasHalf == null)
+            ballType = null;
+        else if (hasHalf)
+            ballType = "half";
+        else
+            ballType = "full";
+
+        out.println("turn;" + ballType);
+
+        String str = "";
+        try {
+            str = in.readLine();
+        } catch (IOException e) {
+            str = "0;0";
+        }
+
+        String[] splitStr = str.split(";");
+
+        return new Vector(Double.parseDouble(splitStr[0]), Double.parseDouble(splitStr[1]));
+    }
+
+    public void pWait() {
+        out.println("wait;");
+    }
+
+    public void win() {
+        out.println("1;");
+    }
+
+    public void lose() {
+        out.println("0;");
     }
 
     public void sendBallsPositions(String position) {
