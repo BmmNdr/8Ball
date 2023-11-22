@@ -18,6 +18,8 @@ public class GUI extends JFrame {
 
     public Image[] ballImages = new Image[16];
 
+    private JLabel ballTypeLabel;
+
     public GUI() {
         this.balls = new ArrayList<Ball>();
 
@@ -98,5 +100,19 @@ public class GUI extends JFrame {
 
     public String getPlayerMove() {
         return textField.getText();
+    }
+
+    public void updateBallType(String ballType) {
+        switch (ballType) {
+            case "null":
+                ballTypeLabel.setText("Non hai ancora scelto un tipo di palla.");
+                break;
+            case "full":
+                ballTypeLabel.setText("Devi colpire una palla piena.");
+                break;
+            case "half":
+                ballTypeLabel.setText("Devi colpire una palla mezza.");
+                break;
+        }
     }
 }
