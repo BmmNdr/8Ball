@@ -24,7 +24,7 @@ public class Player {
     }
 
     // Your turn method, returs cue direction and power (cue ball speed and angle)
-    public Vector yourTurn() { // TODO
+    public Vector yourTurn() {
 
         String ballType;
 

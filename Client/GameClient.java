@@ -20,21 +20,6 @@ public class GameClient {
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
-    /*public void receiveGameState(String gameState) throws IOException {
-        String[] ballsData = gameState.split(";");
-        List<Ball> balls = new ArrayList<>();
-    
-        for (String ballData : ballsData) {
-            String[] parts = ballData.split("_");
-            int number = Integer.parseInt(parts[0]);
-            int x = Integer.parseInt(parts[1]);
-            int y = Integer.parseInt(parts[2]);
-            String type = parts[3];
-            balls.add(new Ball(number, x, y, type));
-        }
-    
-        GUI.updateBalls(balls);
-    }*/
     public void receiveGameState(String gameState) throws IOException {
         String[] ballsData = gameState.split(";");
         List<Ball> balls = new ArrayList<>();
@@ -44,8 +29,7 @@ public class GameClient {
             int number = Integer.parseInt(parts[0]);
             int x = Integer.parseInt(parts[1]);
             int y = Integer.parseInt(parts[2]);
-            String type = parts.length >= 4 ? parts[3] : null; // set type to null if it is not present
-            balls.add(new Ball(number, x, y, type));
+            balls.add(new Ball(number, x, y));
         }
     
         GUI.updateBalls(balls);

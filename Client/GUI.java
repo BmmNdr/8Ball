@@ -105,7 +105,7 @@ public class GUI extends JFrame {
     public void updateBallType(String ballType) {
         switch (ballType) {
             case "null":
-                ballTypeLabel.setText("Non hai ancora scelto un tipo di palla.");
+                ballTypeLabel.setText("");
                 break;
             case "full":
                 ballTypeLabel.setText("Devi colpire una palla piena.");
