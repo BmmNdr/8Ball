@@ -1,3 +1,4 @@
+
 // GameClient.java
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class GameClient {
     public void receiveGameState(String gameState) throws IOException {
         String[] ballsData = gameState.split(";");
         List<Ball> balls = new ArrayList<>();
-    
+
         for (String ballData : ballsData) {
             String[] parts = ballData.split("_");
             int number = Integer.parseInt(parts[0]);
@@ -31,7 +32,7 @@ public class GameClient {
             int y = Integer.parseInt(parts[2]);
             balls.add(new Ball(number, x, y));
         }
-    
+
         GUI.updateBalls(balls);
     }
 
