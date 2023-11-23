@@ -1,99 +1,104 @@
-@startuml Server
+@startuml ServerClass
 
-top to bottom direction
+skinparam linetype ortho
 
 class Ball {
   + Ball(Coord, boolean, int): 
-  + isPotted: boolean
-  + coordinate: Coord
-  + isHalf: boolean
-  + velocity: Vector
-  + number: int
   + stop: boolean
+  + coordinate: Coord
+  + number: int
+  + velocity: Vector
   + isMoving: boolean
-  + setX(double): void
-  + getY(): double
-  + getSpeed(): double
-  + pot(): void
-  + toString(): String
-  + getDX(): double
-  + setMagnitude(double, double): void
-  + getX(): double
-  + setAngle(double, double): void
-  + getAngle(): double
+  + isHalf: boolean
+  + isPotted: boolean
   + run(): void
+  + setX(double): void
+  + getDX(): double
+  + toString(): String
+  + getSpeed(): double
+  - checkPot(): void
   + setY(double): void
+  + getY(): double
+  + getAngle(): double
+  + getX(): double
+  + setMagnitude(double, double): void
   + getDY(): double
+  + pot(): void
+  - wallCollision(): void
+  + setAngle(double, double): void
 }
 class CollisionCheck {
   + CollisionCheck(List<Ball>): 
   + firstPot: Ball
-  - balls: List<Ball>
   + firstCueHit: Ball
-  - resolveCollision(Ball, Ball): void
-  - collideWith(Ball, Ball): boolean
+  - balls: List<Ball>
   - ballsMoving(): boolean
+  - resolveCollision(Ball, Ball): void
   + run(): void
+  - collideWith(Ball, Ball): boolean
   - resolveOverlap(Ball, Ball): void
-  - wallCollision(Ball): void
-  - potRoutine(Ball): void
 }
 class Constants {
   + Constants(): 
-  + tableWidth: int
-  + ballDiameter: int
-  + ballMass: int
-  + tableFriction: int
+  + tableFriction: double
+  + potsPositions: Coord[]
   + tableHeight: int
-  + table: Coord
   + potDiameter: int
+  + ballMass: double
+  + table: Coord
+  + ballDiameter: int
+  + tableWidth: int
   + getBallsInitialPositions(): Coord[]
   + getRadius(): int
 }
 class Coord {
   + Coord(double, double): 
-  + y: double
   + x: double
-  + getY(): double
+  + y: double
+  + getX(): double
   + setY(double): void
   + distance(Coord): double
-  + getX(): double
   + setX(double): void
+  + getY(): double
 }
 class GameManager {
   ~ GameManager(): 
-  ~ player1: Player
-  ~ player2: Player
-  ~ collisionCheck: CollisionCheck
   ~ potInTurn: boolean
+  ~ player1: Player
   ~ foulInTurn: boolean
-  ~ turn: boolean
   ~ balls: List<Ball>
+  ~ collisionCheck: CollisionCheck
+  ~ turn: boolean
   ~ threadSend: ThreadSend
+  ~ player2: Player
+  + debugMode: boolean
+  + ballsMoving(): boolean
   + setPlayer(Player): boolean
+  + sendBallsPosition(): void
   + moveBalls(): void
+  + StartGame(): void
   + checkEndGame(): int
   + Turn(): void
-  + ballsMoving(): boolean
-  + sendBallsPosition(): void
-  + StartGame(): void
 }
 class Player {
   + Player(Socket): 
-  - out: PrintWriter
   + balls: List<Ball>
-  - clientSocket: Socket
   + hasHalf: Boolean
+  - out: PrintWriter
   - in: BufferedReader
-  + yourTurn(): Vector
+  - clientSocket: Socket
+  + lose(): void
+  + win(): void
+  + pWait(): void
   + sendBallsPositions(String): void
+  + yourTurn(): Vector
 }
 class ThreadSend {
   + ThreadSend(GameManager): 
   ~ game: GameManager
-  - ballsMoving(): boolean
   + run(): void
   + sendBallsPosition(): void
+  - ballsMoving(): boolean
 }
 class Vector {
   + Vector(double, double): 
@@ -104,21 +109,22 @@ class Vector {
 }
 class server {
   + server(): 
+  ~ port: int
+  ~ startGame: boolean
+  ~ game: GameManager
+  ~ serverSocket: ServerSocket
   + main(String[]): void
-
-  + game: GameManager
 }
 
 Ball           "1" *-[#595959,plain]-> "coordinate\n1" Coord          
 Ball           "1" *-[#595959,plain]-> "velocity\n1" Vector         
 CollisionCheck "1" *-[#595959,plain]-> "balls\n*" Ball           
-Constants      "1" *-[#595959,plain]-> "table\n1" Coord          
+Constants      "1" *-[#595959,plain]-> "potsPositions\n*" Coord          
 GameManager    "1" *-[#595959,plain]-> "balls\n*" Ball           
 GameManager    "1" *-[#595959,plain]-> "collisionCheck\n1" CollisionCheck 
 GameManager    "1" *-[#595959,plain]-> "player1\n1" Player         
 GameManager    "1" *-[#595959,plain]-> "threadSend\n1" ThreadSend     
 Player         "1" *-[#595959,plain]-> "balls\n*" Ball           
 ThreadSend     "1" *-[#595959,plain]-> "game\n1" GameManager    
-server "1" *--> "game\n1" GameManager
-
+server         "1" *-[#595959,plain]-> "game\n1" GameManager    
 @enduml

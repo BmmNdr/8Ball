@@ -16,7 +16,7 @@ public class app {
             if (tmp[0].equals("paint"))
                 gameClient.receiveGameState(tmp[1]);
             else if (tmp[0].equals("turn"))
-
+                
             else if (tmp[0].equals("wait"))
 
             else if (tmp[0].equals("end"))

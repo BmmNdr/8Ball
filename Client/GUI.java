@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends JFrame {
-    private List<Ball> balls;
+    private List<CBall> balls;
     private JButton button;
     private JTextField textField;
 
@@ -26,9 +26,10 @@ public class GUI extends JFrame {
     private Image cueImage;
 
     public GUI() {
-        this.balls = new ArrayList<Ball>();
+        this.balls = new ArrayList<CBall>();
 
-        setSize(Constants.tableWidth + Constants.widthOffset * 2, Constants.tableHeight + Constants.heightOffset * 2);
+        setSize(CConstants.tableWidth + CConstants.widthOffset * 2,
+                CConstants.tableHeight + CConstants.heightOffset * 2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create the button and text field
@@ -44,7 +45,7 @@ public class GUI extends JFrame {
             try {
                 File file = new File("./pool_assets/ball" + i + ".png");
                 // System.out.println(file.getAbsolutePath());
-                ballImages[i] = ImageIO.read(file).getScaledInstance(Constants.ballDiameter, Constants.ballDiameter,
+                ballImages[i] = ImageIO.read(file).getScaledInstance(CConstants.ballDiameter, CConstants.ballDiameter,
                         Image.SCALE_DEFAULT);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -54,8 +55,8 @@ public class GUI extends JFrame {
         // Initialize cueImage with the cue stick image
         try {
             File file = new File("./pool_assets/cue.png");
-                // System.out.println(file.getAbsolutePath());
-                cueImage = ImageIO.read(file);
+            // System.out.println(file.getAbsolutePath());
+            cueImage = ImageIO.read(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,32 +89,32 @@ public class GUI extends JFrame {
     public void updateCue(Cue cue) {
         // Define the power scale factor
         final double POWER_SCALE_FACTOR = 5.0;
-    
+
         // Calculate the new size based on the power
         int newSize = (int) (cueImage.getWidth(null) * cue.getPower() / POWER_SCALE_FACTOR);
-    
+
         // Scale the image
         Image scaledCueImage = cueImage.getScaledInstance(newSize, newSize, Image.SCALE_DEFAULT);
-    
+
         // Create a new image to draw the rotated cue onto
         BufferedImage rotatedCueImage = new BufferedImage(newSize, newSize, BufferedImage.TYPE_INT_ARGB);
-    
+
         // Get the graphics context from the new image
         Graphics2D g2d = rotatedCueImage.createGraphics();
-    
+
         // Rotate the image
         g2d.rotate(Math.toRadians(cue.getAngle()), newSize / 2, newSize / 2);
         g2d.drawImage(scaledCueImage, 0, 0, null);
         g2d.dispose();
-    
+
         // Set the cue image to the new rotated image
         cueImage = rotatedCueImage;
-    
+
         // Repaint the GUI to show the updated cue
         repaint();
     }
 
-    public void updateBalls(List<Ball> balls) {
+    public void updateBalls(List<CBall> balls) {
         this.balls = balls;
         repaint();
     }
@@ -138,33 +139,33 @@ public class GUI extends JFrame {
 
         // Draw the pool table
         g.setColor(new Color(0, 85, 54));
-        g.fillRect(Constants.widthOffset, Constants.heightOffset, Constants.tableWidth, Constants.tableHeight);
+        g.fillRect(CConstants.widthOffset, CConstants.heightOffset, CConstants.tableWidth, CConstants.tableHeight);
 
         g.setColor(Color.black);
 
-        g.fillOval(Constants.widthOffset - Constants.potDiameter / 2,
-                Constants.heightOffset - Constants.potDiameter / 2, Constants.potDiameter, Constants.potDiameter);
-        g.fillOval(Constants.widthOffset + (Constants.tableWidth / 2 - Constants.potDiameter / 2),
-                Constants.heightOffset - Constants.potDiameter / 2, Constants.potDiameter, Constants.potDiameter);
-        g.fillOval(Constants.widthOffset + (Constants.tableWidth - Constants.potDiameter / 2),
-                Constants.heightOffset - Constants.potDiameter / 2, Constants.potDiameter, Constants.potDiameter);
+        g.fillOval(CConstants.widthOffset - CConstants.potDiameter / 2,
+                CConstants.heightOffset - CConstants.potDiameter / 2, CConstants.potDiameter, CConstants.potDiameter);
+        g.fillOval(CConstants.widthOffset + (CConstants.tableWidth / 2 - CConstants.potDiameter / 2),
+                CConstants.heightOffset - CConstants.potDiameter / 2, CConstants.potDiameter, CConstants.potDiameter);
+        g.fillOval(CConstants.widthOffset + (CConstants.tableWidth - CConstants.potDiameter / 2),
+                CConstants.heightOffset - CConstants.potDiameter / 2, CConstants.potDiameter, CConstants.potDiameter);
 
-        g.fillOval(Constants.widthOffset - Constants.potDiameter / 2,
-                Constants.heightOffset + (Constants.tableHeight - Constants.potDiameter / 2), Constants.potDiameter,
-                Constants.potDiameter);
-        g.fillOval(Constants.widthOffset + (Constants.tableWidth / 2 - Constants.potDiameter / 2),
-                Constants.heightOffset + (Constants.tableHeight - Constants.potDiameter / 2), Constants.potDiameter,
-                Constants.potDiameter);
-        g.fillOval(Constants.widthOffset + (Constants.tableWidth - Constants.potDiameter / 2),
-                Constants.heightOffset + (Constants.tableHeight - Constants.potDiameter / 2), Constants.potDiameter,
-                Constants.potDiameter);
+        g.fillOval(CConstants.widthOffset - CConstants.potDiameter / 2,
+                CConstants.heightOffset + (CConstants.tableHeight - CConstants.potDiameter / 2), CConstants.potDiameter,
+                CConstants.potDiameter);
+        g.fillOval(CConstants.widthOffset + (CConstants.tableWidth / 2 - CConstants.potDiameter / 2),
+                CConstants.heightOffset + (CConstants.tableHeight - CConstants.potDiameter / 2), CConstants.potDiameter,
+                CConstants.potDiameter);
+        g.fillOval(CConstants.widthOffset + (CConstants.tableWidth - CConstants.potDiameter / 2),
+                CConstants.heightOffset + (CConstants.tableHeight - CConstants.potDiameter / 2), CConstants.potDiameter,
+                CConstants.potDiameter);
 
         // Draw the balls using the images
-        for (Ball ball : balls) {
+        for (CBall ball : balls) {
 
             if (ball.getX() >= 0 && ball.getY() >= 0)
-                g.drawImage(ballImages[ball.getNumber()], ball.getX() + Constants.widthOffset - Constants.getRadius(),
-                        ball.getY() + Constants.heightOffset - Constants.getRadius(), null);
+                g.drawImage(ballImages[ball.getNumber()], ball.getX() + CConstants.widthOffset - CConstants.getRadius(),
+                        ball.getY() + CConstants.heightOffset - CConstants.getRadius(), null);
         }
 
         updateBalls(balls);

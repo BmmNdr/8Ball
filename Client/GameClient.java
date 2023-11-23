@@ -23,14 +23,14 @@ public class GameClient {
 
     public void receiveGameState(String gameState) throws IOException {
         String[] ballsData = gameState.split(";");
-        List<Ball> balls = new ArrayList<>();
+        List<CBall> balls = new ArrayList<>();
 
         for (String ballData : ballsData) {
             String[] parts = ballData.split("_");
             int number = Integer.parseInt(parts[0]);
             int x = Integer.parseInt(parts[1]);
             int y = Integer.parseInt(parts[2]);
-            balls.add(new Ball(number, x, y));
+            balls.add(new CBall(number, x, y));
         }
 
         GUI.updateBalls(balls);
