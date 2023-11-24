@@ -13,9 +13,9 @@ public class GameClient {
     public BufferedReader in;
     private GUI GUI;
 
-    public GameClient(GUI GUI) throws IOException {
+    public GameClient(GUI GUI, String ip, int port) throws IOException {
         this.GUI = GUI;
-        Socket clientSocket = new Socket("127.0.0.1", 666);
+        Socket clientSocket = new Socket(ip, port);
         this.out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
@@ -49,7 +49,6 @@ public class GameClient {
                 e.printStackTrace();
             }
         }
-
 
         System.out.println("Move sent to server: " + GUI.message);
 

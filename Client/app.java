@@ -4,8 +4,20 @@ import java.io.IOException;
 
 public class app {
     public static void main(String[] args) throws IOException {
+
+        ServerConnectionWindow scw = new ServerConnectionWindow();
+
+        while (scw.frame.isVisible()) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        ;
+
         GUI gui = new GUI();
-        GameClient gameClient = new GameClient(gui);
+        GameClient gameClient = new GameClient(gui, scw.ipAddress, scw.port);
 
         while (true) {
             String[] tmp = gameClient.in.readLine().split(";", 2);

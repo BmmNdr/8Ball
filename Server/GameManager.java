@@ -15,7 +15,7 @@ public class GameManager {
     boolean potInTurn = false;
     boolean foulInTurn = false;
 
-    public boolean debugMode = false;
+    public boolean debugMode = true;
 
     GameManager() {
         this.player1 = null;
