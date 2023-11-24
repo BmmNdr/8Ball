@@ -51,12 +51,12 @@ public class Ball extends Thread {
 
         }
 
+        velocity.speed = 0;
+        velocity.angle = 0;
     }
 
     private void checkPot() {
-        // TODO check if ball center is inside the pot circle
         // Serach for point inside a circle
-
         for (Coord pot : Constants.potsPositions) {
             if (this.coordinate.distance(pot) < Constants.potDiameter / 2) {
                 pot();
