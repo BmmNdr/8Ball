@@ -1,3 +1,4 @@
+
 // GUI.java
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -121,13 +122,17 @@ public class GUI extends JFrame {
 
         this.getContentPane().setBackground(Color.BLACK);
 
-        //Draw Border
-        g.setColor(new Color(150, 75,0));
-        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.heightOffset - CConstants.border, CConstants.tableWidth + (2 * CConstants.border), CConstants.border);
-        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.tableHeight + CConstants.heightOffset , CConstants.tableWidth + (2 * CConstants.border), CConstants.border);
+        // Draw Border
+        g.setColor(new Color(150, 75, 0));
+        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.heightOffset - CConstants.border,
+                CConstants.tableWidth + (2 * CConstants.border), CConstants.border);
+        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.tableHeight + CConstants.heightOffset,
+                CConstants.tableWidth + (2 * CConstants.border), CConstants.border);
 
-        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.heightOffset - CConstants.border, CConstants.border, CConstants.tableHeight + (2 * CConstants.border));
-        g.fillRect(CConstants.widthOffset + CConstants.tableWidth, CConstants.heightOffset - CConstants.border, CConstants.border, CConstants.tableHeight + (2 * CConstants.border));
+        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.heightOffset - CConstants.border,
+                CConstants.border, CConstants.tableHeight + (2 * CConstants.border));
+        g.fillRect(CConstants.widthOffset + CConstants.tableWidth, CConstants.heightOffset - CConstants.border,
+                CConstants.border, CConstants.tableHeight + (2 * CConstants.border));
 
         // Draw the pool table
         g.setColor(new Color(0, 85, 54));
@@ -153,11 +158,17 @@ public class GUI extends JFrame {
                 CConstants.potDiameter);
 
         // Draw the balls using the images
+        int i = 1;
         for (CBall ball : balls) {
 
             if (ball.getX() >= 0 && ball.getY() >= 0)
                 g.drawImage(ballImages[ball.getNumber()], ball.getX() + CConstants.widthOffset - CConstants.getRadius(),
                         ball.getY() + CConstants.heightOffset - CConstants.getRadius(), null);
+            else {
+                g.drawImage(ballImages[ball.getNumber()].getScaledInstance(CConstants.getRadius() * 2, CConstants.getRadius() * 2, Image.SCALE_DEFAULT), CConstants.widthOffset + (CConstants.getRadius() * 2 * i) + 20,
+                        (CConstants.heightOffset / 2) - CConstants.getRadius(), null);
+                i++;
+            }
         }
 
         if (isturn) {
@@ -184,8 +195,8 @@ public class GUI extends JFrame {
 
     public void updateBallType(String ballType) {
 
-         ballTypeLabel.setVisible(true);
-         ballTypeLabel.setForeground(Color.RED);
+        ballTypeLabel.setVisible(true);
+        ballTypeLabel.setForeground(Color.RED);
 
         switch (ballType) {
             case "null":
@@ -200,7 +211,7 @@ public class GUI extends JFrame {
         }
     }
 
-    public void hideTurnLabel(){
+    public void hideTurnLabel() {
         ballTypeLabel.setVisible(false);
     }
 

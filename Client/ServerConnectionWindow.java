@@ -63,6 +63,7 @@ public class ServerConnectionWindow {
         frame.add(ipLabel);
 
         JTextField ipField = new JTextField();
+        ipField.setText("127.0.0.1");
         ipField.setBounds(150, 20, 120, 25);
         frame.add(ipField);
 
@@ -71,6 +72,7 @@ public class ServerConnectionWindow {
         frame.add(portLabel);
 
         JTextField portField = new JTextField();
+        portField.setText("666");
         portField.setBounds(150, 50, 120, 25);
         frame.add(portField);
 

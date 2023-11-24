@@ -15,7 +15,7 @@ public class GameManager {
     boolean potInTurn = false;
     boolean foulInTurn = false;
 
-    public boolean debugMode = true;
+    public boolean debugMode = true; //Activates debug mode
 
     GameManager() {
         this.player1 = null;
@@ -71,11 +71,11 @@ public class GameManager {
 
             Turn();
 
+            winner = checkEndGame();
+
             // If in the turn a foul happened or the player didn't pot any ball...
             if (foulInTurn || !potInTurn)
                 turn = !turn; // ...turn passes to the other player
-
-            winner = checkEndGame();
         }
 
         if (winner == 1) {
