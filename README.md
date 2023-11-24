@@ -27,6 +27,3 @@ Sara' quindi necessario un solo client e durante il gioco sara' sempre il suo tu
 - Aggiungere sezione iniziale per decidere il server su quale giocare
 - Aggiungere la possibilita' di hostare piu' partite da uno stesso server
 - Comunicazione al giocatore del fallo commesso.
-
-## KNOWN ISSUES
-- A volte le palline si fermano anche se ancora in movimento e concludono lo spostamento al turno successivo :sweat_smile:
