@@ -1,9 +1,9 @@
 public class Cue {
     private double angle;
-    private int power;
+    private double power;
 
     public Cue() {
-        this.angle = 0;
+        this.angle = Math.PI;
         this.power = 1;
     }
 
@@ -15,11 +15,11 @@ public class Cue {
         this.angle = angle;
     }
 
-    public int getPower() {
+    public double getPower() {
         return power;
     }
 
-    public void setPower(int power) {
+    public void setPower(double power) {
         this.power = power;
     }
 }

@@ -24,7 +24,7 @@ public class Player {
     }
 
     // Your turn method, returs cue direction and power (cue ball speed and angle)
-    public Vector yourTurn() {
+    public Vector yourTurn() throws IOException {
 
         String ballType;
 
@@ -37,16 +37,14 @@ public class Player {
 
         out.println("turn;" + ballType);
 
-        String str = "";
-        try {
-            str = in.readLine();
-        } catch (IOException e) {
-            str = "0;0";
-        }
+        String str = in.readLine();
+
+        System.out.println("Player move: " + str);
 
         String[] splitStr = str.split(";");
 
         return new Vector(Double.parseDouble(splitStr[0]), Double.parseDouble(splitStr[1]));
+
     }
 
     public void pWait() {

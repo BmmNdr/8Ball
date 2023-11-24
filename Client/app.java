@@ -9,6 +9,7 @@ public class app {
 
         while (true) {
             String[] tmp = gameClient.in.readLine().split(";", 2);
+            System.out.println(tmp[1]);
 
             if (tmp[0].equals("paint")) {
                 gui.hideWaitLabel();

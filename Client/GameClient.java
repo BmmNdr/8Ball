@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameClient {
-    private Socket clientSocket;
     private PrintWriter out;
     public BufferedReader in;
     private GUI GUI;
 
     public GameClient(GUI GUI) throws IOException {
         this.GUI = GUI;
-        this.clientSocket = new Socket("127.0.0.1", 666);
+        Socket clientSocket = new Socket("127.0.0.1", 666);
         this.out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
@@ -43,13 +42,18 @@ public class GameClient {
     public void sendNotification() {
 
         while (GUI.isturn) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
-        out.println(GUI.getMessage());
-    }
 
-    public void close() throws IOException {
-        clientSocket.close();
+        System.out.println("Move sent to server: " + GUI.message);
+
+        out.println(GUI.message);
     }
 
     public void receiveTurn(String turn) {

@@ -37,8 +37,6 @@ public class Ball extends Thread {
                         velocity.speed -= Constants.tableFriction;
                 } else {
                     isMoving = false;
-                    velocity.speed = 0;
-                    velocity.angle = 0;
                 }
 
                 checkPot();

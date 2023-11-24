@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -54,17 +55,16 @@ public class GameManager {
         return true; // if both players are sets
     }
 
-    public void StartGame() {
-
-        // Sends initial balls positions
-        sendBallsPosition();
-
+    public void StartGame() throws IOException {
         // Select random player to start
         this.turn = new Random().nextBoolean();
 
         // Set Balls position
         int winner = 0;
         while (winner == 0) {
+
+            // Sends initial balls positions
+            sendBallsPosition();
 
             if (debugMode)
                 turn = true;
@@ -91,7 +91,7 @@ public class GameManager {
         }
     }
 
-    public void Turn() {
+    public void Turn() throws IOException {
         // Reset turn var
         potInTurn = false;
         foulInTurn = false;

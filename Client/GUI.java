@@ -44,6 +44,8 @@ public class GUI extends JFrame {
     public Boolean isturn = false;
     public String message;
 
+    Cue cue = new Cue();
+
     public GUI() {
         this.balls = new ArrayList<CBall>();
 
@@ -54,6 +56,10 @@ public class GUI extends JFrame {
         // Create the button and text field
         JPanel panel = new JPanel();
 
+        panel.add(ballTypeLabel);
+        panel.add(waitLabel);
+        panel.add(endGameLabel);
+
         // Add the panel to the frame
         add(panel, BorderLayout.SOUTH);
 
@@ -62,8 +68,7 @@ public class GUI extends JFrame {
         // Load the images in the array
         for (int i = 0; i < 16; i++) {
             try {
-                File fileBall = new File("pool_assets/ball" + i + ".png");
-                System.out.println(fileBall.getAbsolutePath());
+                File fileBall = new File("./pool_assets/ball" + i + ".png");
                 ballImages[i] = ImageIO.read(fileBall).getScaledInstance(CConstants.ballDiameter,
                         CConstants.ballDiameter,
                         Image.SCALE_DEFAULT);
@@ -76,13 +81,16 @@ public class GUI extends JFrame {
         try {
             File fileCue = new File("./pool_assets/cue.png");
             // System.out.println(file.getAbsolutePath());
-            cueImage = ImageIO.read(fileCue);
+            cueImage = ImageIO.read(fileCue).getScaledInstance(CConstants.cueWidth,
+                    CConstants.cueHeight,
+                    Image.SCALE_DEFAULT);
+            ;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Create the Cue object and add the key listener
-        Cue cue = new Cue();
+
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (!isturn) {
@@ -91,69 +99,27 @@ public class GUI extends JFrame {
 
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
-                        cue.setAngle(cue.getAngle() - 1);
+                        cue.setAngle(cue.getAngle() - 0.05);
                         break;
                     case KeyEvent.VK_RIGHT:
-                        cue.setAngle(cue.getAngle() + 1);
+                        cue.setAngle(cue.getAngle() + 0.05);
                         break;
                     case KeyEvent.VK_UP:
-                        cue.setPower(Math.min(cue.getPower() + 1, 5));
+                        cue.setPower(Math.min(cue.getPower() + 0.5, 10));
                         break;
                     case KeyEvent.VK_DOWN:
-                        cue.setPower(Math.max(cue.getPower() - 1, 1));
+                        cue.setPower(Math.max(cue.getPower() - 0.5, 1));
                         break;
                     case KeyEvent.VK_ENTER:
-                        message = cue.getAngle() + ";" + cue.getPower();
-                        setMessage(message);
+                        message = (cue.getAngle() - Math.PI) + ";" + cue.getPower();
                         isturn = false;
                         break;
                 }
-                updateCue(cue);
+                repaint();
             }
         });
 
         setVisible(true);
-    }
-
-    public void updateCue(Cue cue) {
-        // Define the power scale factor
-        final double POWER_SCALE_FACTOR = 5.0;
-
-        // Calculate the new size based on the power
-        int newSize = (int) (cueImage.getWidth(null) * cue.getPower() / POWER_SCALE_FACTOR);
-
-        // Scale the image
-        Image scaledCueImage = cueImage.getScaledInstance(newSize, newSize, Image.SCALE_DEFAULT);
-
-        // Create a new image to draw the rotated cue onto
-        BufferedImage rotatedCueImage = new BufferedImage(newSize, newSize, BufferedImage.TYPE_INT_ARGB);
-
-        // Get the graphics context from the new image
-        Graphics2D g2d = rotatedCueImage.createGraphics();
-
-        // Rotate the image
-        g2d.rotate(Math.toRadians(cue.getAngle()), newSize / 2, newSize / 2);
-        g2d.drawImage(scaledCueImage, 0, 0, null);
-        g2d.dispose();
-
-        // Set the cue image to the new rotated image
-        cueImage = rotatedCueImage;
-
-        // Repaint the GUI to show the updated cue
-        repaint();
-    }
-
-    public void showBallTypeLabelFor10Sec() {
-        ballTypeLabel.setVisible(true);
-
-        Timer timer = new Timer(10000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ballTypeLabel.setVisible(false);
-            }
-        });
-
-        timer.setRepeats(false);
-        timer.start();
     }
 
     public void updateBalls(List<CBall> balls) {
@@ -210,10 +176,59 @@ public class GUI extends JFrame {
                         ball.getY() + CConstants.heightOffset - CConstants.getRadius(), null);
         }
 
-        showBallTypeLabelFor10Sec();
+        if (isturn) {
+            // rotation coordinates
+            double distance = (10 * cue.getPower()) + CConstants.getRadius();
+
+            int x1 = (int) Math.round(balls.get(0).x + distance * Math.cos(cue.getAngle()));
+            int y1 = (int) Math.round(balls.get(0).y + distance * Math.sin(cue.getAngle()));
+
+            // g.drawImage(rotate(cueImage, cue.getAngle()), x + CConstants.widthOffset, y +
+            // CConstants.heightOffset /* - CConstants.cueHeight / 2 */,
+            // null);
+
+            int x2 = (int) Math.round(x1 + CConstants.cueWidth * Math.cos(cue.getAngle()));
+            int y2 = (int) Math.round(y1 + CConstants.cueWidth * Math.sin(cue.getAngle()));
+
+            g.setColor(Color.BLACK);
+            g.drawLine(x1 + CConstants.widthOffset, y1 + CConstants.heightOffset, x2 + CConstants.widthOffset,
+                    y2 + CConstants.heightOffset);
+        }
 
         updateBalls(balls);
+    }
 
+    public BufferedImage rotate(Image img, Double angle) {
+
+        BufferedImage bimg = toBufferedImage(img);
+
+        double sin = Math.abs(Math.sin(angle)),
+                cos = Math.abs(Math.cos(angle));
+        int w = bimg.getWidth();
+        int h = bimg.getHeight();
+        int neww = (int) Math.floor(w * cos + h * sin),
+                newh = (int) Math.floor(h * cos + w * sin);
+        BufferedImage rotated = new BufferedImage(neww, newh, bimg.getType());
+        Graphics2D graphic = rotated.createGraphics();
+
+        graphic.translate((neww - w) / 2, (newh - h) / 2);
+
+        graphic.rotate(angle, w / 2, h / 2);
+        graphic.drawRenderedImage(bimg, null);
+        graphic.dispose();
+        return rotated;
+    }
+
+    public BufferedImage toBufferedImage(Image img) {
+
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null),
+                BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D graphics2D = bufferedImage.createGraphics();
+        graphics2D.drawImage(img, 0, 0, null);
+        graphics2D.dispose();
+
+        return bufferedImage;
     }
 
     public JButton getButton() {
@@ -222,14 +237,6 @@ public class GUI extends JFrame {
 
     public String getPlayerMove() {
         return textField.getText();
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public void updateBallType(String ballType) {

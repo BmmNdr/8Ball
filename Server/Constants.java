@@ -1,5 +1,4 @@
 public class Constants {
-	public static double ballMass = Math.pow(Constants.getRadius(), 3);
 	public static int ballDiameter = 20;
 
 	public static int potDiameter = 50;

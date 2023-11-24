@@ -9,6 +9,9 @@ public class CConstants {
     public static int widthOffset = 100;
     public static int heightOffset = 100;
 
+    public static int cueWidth = 300;
+    public static int cueHeight = 10;
+
     static public int getRadius() {
         return ballDiameter / 2;
     }

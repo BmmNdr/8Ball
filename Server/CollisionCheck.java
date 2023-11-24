@@ -68,8 +68,8 @@ public class CollisionCheck extends Thread {
         double distanceAngle = Math.atan2(ball.getY() - ball2.getY(), ball.getX() - ball2.getX());
 
         // "Massa" dei due oggetti
-        double thisMass = Constants.ballMass;
-        double otherMass = Constants.ballMass;
+        double thisMass = Math.pow(Constants.getRadius(), 3);
+        double otherMass = Math.pow(Constants.getRadius(), 3);
 
         // Misura Scalare delle velocità iniziali
         double thisV = ball2.getSpeed();
