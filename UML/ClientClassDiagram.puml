@@ -1,40 +1,86 @@
-@startuml Client_ClassDiagram
+@startuml ClientClass
 
-class app {
-    +static void main(String[] args)
+class GameClient {
+    - clientSocket: Socket
+    - out: PrintWriter
+    - in: BufferedReader
+    - GUI: GUI
+
+    + GameClient(GUI) throws IOException
+    + receiveGameState(String) throws IOException
+    + sendPlayerMove(String): void
+    + close(): void
+    + receiveTurn(String): void
 }
 
 class GUI {
-    -List<Ball> balls
-    -JButton button
-    -JTextField textField
-    +GUI()
-    +void updateBalls(List<Ball> balls)
-    +void paint(Graphics g)
-    +JButton getButton()
-    +String getPlayerMove()
+    - balls: List<CBall>
+    - button: JButton
+    - textField: JTextField
+    - offScreenImageDrawed: Image
+    - offScreenGraphicsDrawed: Graphics
+    - ballImages: Image[]
+    - cueImage: Image
+    - ballTypeLabel: JLabel
+
+    + GUI()
+    + updateCue(Cue): void
+    + updateBalls(List<CBall>): void
+    + paint(Graphics): void
+    + renderOffScreen(Graphics): void
+    + getButton(): JButton
+    + getPlayerMove(): String
+    + updateBallType(String): void
 }
 
-class GameClient {
-    -Socket clientSocket
-    -PrintWriter out
-    -BufferedReader in
-    -GUI gui
-    +GameClient(GUI gui)
-    +void receiveGameState()
-    +void sendPlayerMove(String move)
-    +void close()
+class CBall {
+    - number: int
+    - x: int
+    - y: int
+
+    + CBall(int, int, int)
+    + getNumber(): int
+    + getX(): int
+    + getY(): int
 }
 
-class Ball {
-    -int number
-    -int x
-    -int y
-    +Ball(int number, int x, int y)
+class Cue {
+    - angle: double
+    - power: int
+
+    + Cue()
+    + getAngle(): double
+    + setAngle(double): void
+    + getPower(): int
+    + setPower(int): void
 }
 
-app --> GameClient
-GameClient --> GUI
-GUI --> Ball
+class CConstants {
+    + ballDiameter: int
+    + potDiameter: int
+    + tableWidth: int
+    + tableHeight: int
+    + widthOffset: int
+    + heightOffset: int
+
+    + getRadius(): int
+}
+
+class app {
+    + main(String[]): void
+}
+
+GameClient --> GUI: Contains
+GameClient --> CBall: Uses
+GameClient --> Cue: Uses
+GameClient --> CConstants: Uses
+
+GUI --> CBall: Contains
+GUI --> Cue: Contains
+GUI --> CConstants: Uses
+
+Cue --> CConstants: Uses
+
+app --> GameClient: Uses
 
 @enduml

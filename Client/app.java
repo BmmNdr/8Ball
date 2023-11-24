@@ -13,14 +13,15 @@ public class app {
         while (true) {
             String[] tmp = gameClient.in.readLine().split(";", 2);
 
-            if (tmp[0].equals("paint"))
+            if (tmp[0].equals("paint")) {
                 gameClient.receiveGameState(tmp[1]);
-            else if (tmp[0].equals("turn"))
-                
-            else if (tmp[0].equals("wait"))
-
-            else if (tmp[0].equals("end"))
-
+            } else if (tmp[0].equals("turn")) {
+                // Handle turn
+            } else if (tmp[0].equals("wait")) {
+                // Handle wait
+            } else if (tmp[0].equals("end")) {
+                // Handle end
+            }
         }
     }
 }
