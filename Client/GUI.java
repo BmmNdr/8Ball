@@ -1,19 +1,29 @@
 
 // GUI.java
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import javafx.event.ActionEvent;
-
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
+import java.awt.event.ActionEvent;
 
 public class GUI extends JFrame {
     private List<CBall> balls;
@@ -25,14 +35,13 @@ public class GUI extends JFrame {
 
     public Image[] ballImages = new Image[16];
 
-    private JLabel ballTypeLabel;
-    private JLabel waitLabel;
-    private JLabel endGameLabel;
+    private JLabel ballTypeLabel = new JLabel();
+    private JLabel waitLabel = new JLabel();
+    private JLabel endGameLabel = new JLabel();
 
     private Image cueImage;
 
     public Boolean isturn = false;
-
     public String message;
 
     public GUI() {
@@ -53,8 +62,8 @@ public class GUI extends JFrame {
         // Load the images in the array
         for (int i = 0; i < 16; i++) {
             try {
-                File fileBall = new File("./pool_assets/ball" + i + ".png");
-                // System.out.println(file.getAbsolutePath());
+                File fileBall = new File("pool_assets/ball" + i + ".png");
+                System.out.println(fileBall.getAbsolutePath());
                 ballImages[i] = ImageIO.read(fileBall).getScaledInstance(CConstants.ballDiameter,
                         CConstants.ballDiameter,
                         Image.SCALE_DEFAULT);
@@ -79,6 +88,7 @@ public class GUI extends JFrame {
                 if (!isturn) {
                     return;
                 }
+
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         cue.setAngle(cue.getAngle() - 1);
@@ -139,12 +149,6 @@ public class GUI extends JFrame {
         Timer timer = new Timer(10000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ballTypeLabel.setVisible(false);
-            }
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
             }
         });
 
@@ -220,7 +224,6 @@ public class GUI extends JFrame {
         return textField.getText();
     }
 
-    
     public String getMessage() {
         return message;
     }
@@ -228,7 +231,7 @@ public class GUI extends JFrame {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     public void updateBallType(String ballType) {
         switch (ballType) {
             case "null":
@@ -246,6 +249,7 @@ public class GUI extends JFrame {
     public void showWaitLabel() {
         waitLabel.setVisible(true);
     }
+
     public void hideWaitLabel() {
         waitLabel.setVisible(false);
     }

@@ -42,7 +42,8 @@ public class GameClient {
 
     public void sendNotification() {
 
-        while(GUI.isturn){}
+        while (GUI.isturn) {
+        }
 
         out.println(GUI.getMessage());
     }
@@ -53,7 +54,7 @@ public class GameClient {
 
     public void receiveTurn(String turn) {
         String[] parts = turn.split(";");
-        String ballType = parts[1]; // get the type of ball the player can hit
+        String ballType = parts[0]; // get the type of ball the player can hit
         GUI.isturn = true;
         GUI.updateBallType(ballType);
     }

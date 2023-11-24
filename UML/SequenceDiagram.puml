@@ -1,0 +1,45 @@
+@startuml Sequence
+
+participant Client1 order 10
+participant Server order 20
+participant Client2 order 30
+
+Client1 -> Server: Connect to server
+Server <- Server: Socket created for Player 1
+
+Client2 -> Server: Connect to server
+Server -> Server: Socket created for Player 2
+
+note over Server : Game Starts
+
+Client1 <- Server: Send Initial Balls Position
+Client2 <- Server: Send Initial Balls Position
+
+note over Server: Player1 Turn
+
+Client2 <- Server: Wait Player 1 Move
+
+Client1 <- Server: Your Turn
+Client1 -> Server: Notify move
+
+Client1 <- Server: Send Balls Position
+Client2 <- Server: Send Balls Position
+
+note over Server: Player2 Turn
+
+Client1 <- Server: Wait Player 2 Move
+
+Client2 <- Server: Your Turn
+Client2 -> Server: Notify move
+
+Client1 <- Server: Send Balls Position
+Client2 <- Server: Send Balls Position
+
+note over Server: Game Over
+
+Server -> Client1: Notify Winner
+Server -> Client2: Notify Winner
+
+note over Server: Close Server
+
+@enduml

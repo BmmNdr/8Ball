@@ -80,10 +80,14 @@ public class GameManager {
 
         if (winner == 1) {
             player1.win();
-            player2.lose();
+
+            if (!debugMode)
+                player2.lose();
         } else if (winner == 2) {
             player1.lose();
-            player2.win();
+
+            if (!debugMode)
+                player2.win();
         }
     }
 
@@ -93,10 +97,10 @@ public class GameManager {
         foulInTurn = false;
 
         // At every turn, get cue direction and force while the other player waits
-        if (turn)
-            player2.pWait();
-        else
+        if (!turn)
             player1.pWait();
+        else if (!debugMode)
+            player2.pWait();
 
         Vector cue = turn ? player1.yourTurn() : player2.yourTurn();
 
