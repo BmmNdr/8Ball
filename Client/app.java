@@ -9,9 +9,9 @@ public class app {
 
         while (true) {
             String[] tmp = gameClient.in.readLine().split(";", 2);
-            System.out.println(tmp[1]);
 
             if (tmp[0].equals("paint")) {
+                gui.hideTurnLabel();
                 gui.hideWaitLabel();
                 gameClient.receiveGameState(tmp[1]);
             } else if (tmp[0].equals("turn")) {

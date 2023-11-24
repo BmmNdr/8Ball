@@ -1,34 +1,23 @@
-
 // GUI.java
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
-
-import java.awt.event.ActionEvent;
 
 public class GUI extends JFrame {
     private List<CBall> balls;
-    private JButton button;
-    private JTextField textField;
 
     private Image offScreenImageDrawed;
     private Graphics offScreenGraphicsDrawed;
@@ -38,8 +27,6 @@ public class GUI extends JFrame {
     private JLabel ballTypeLabel = new JLabel();
     private JLabel waitLabel = new JLabel();
     private JLabel endGameLabel = new JLabel();
-
-    private Image cueImage;
 
     public Boolean isturn = false;
     public String message;
@@ -77,20 +64,7 @@ public class GUI extends JFrame {
             }
         }
 
-        // Initialize cueImage with the cue stick image
-        try {
-            File fileCue = new File("./pool_assets/cue.png");
-            // System.out.println(file.getAbsolutePath());
-            cueImage = ImageIO.read(fileCue).getScaledInstance(CConstants.cueWidth,
-                    CConstants.cueHeight,
-                    Image.SCALE_DEFAULT);
-            ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         // Create the Cue object and add the key listener
-
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (!isturn) {
@@ -133,7 +107,7 @@ public class GUI extends JFrame {
         offScreenImageDrawed = createImage(d.width, d.height);
 
         this.offScreenGraphicsDrawed = offScreenImageDrawed.getGraphics();
-        this.offScreenGraphicsDrawed.setColor(Color.white);
+        this.offScreenGraphicsDrawed.setColor(Color.black);
         this.offScreenGraphicsDrawed.fillRect(0, 0, d.width, d.height);
         /////////////////////
         // Paint Offscreen //
@@ -144,6 +118,16 @@ public class GUI extends JFrame {
 
     public void renderOffScreen(Graphics g) {
         super.paint(g);
+
+        this.getContentPane().setBackground(Color.BLACK);
+
+        //Draw Border
+        g.setColor(new Color(150, 75,0));
+        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.heightOffset - CConstants.border, CConstants.tableWidth + (2 * CConstants.border), CConstants.border);
+        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.tableHeight + CConstants.heightOffset , CConstants.tableWidth + (2 * CConstants.border), CConstants.border);
+
+        g.fillRect(CConstants.widthOffset - CConstants.border, CConstants.heightOffset - CConstants.border, CConstants.border, CConstants.tableHeight + (2 * CConstants.border));
+        g.fillRect(CConstants.widthOffset + CConstants.tableWidth, CConstants.heightOffset - CConstants.border, CConstants.border, CConstants.tableHeight + (2 * CConstants.border));
 
         // Draw the pool table
         g.setColor(new Color(0, 85, 54));
@@ -198,51 +182,14 @@ public class GUI extends JFrame {
         updateBalls(balls);
     }
 
-    public BufferedImage rotate(Image img, Double angle) {
-
-        BufferedImage bimg = toBufferedImage(img);
-
-        double sin = Math.abs(Math.sin(angle)),
-                cos = Math.abs(Math.cos(angle));
-        int w = bimg.getWidth();
-        int h = bimg.getHeight();
-        int neww = (int) Math.floor(w * cos + h * sin),
-                newh = (int) Math.floor(h * cos + w * sin);
-        BufferedImage rotated = new BufferedImage(neww, newh, bimg.getType());
-        Graphics2D graphic = rotated.createGraphics();
-
-        graphic.translate((neww - w) / 2, (newh - h) / 2);
-
-        graphic.rotate(angle, w / 2, h / 2);
-        graphic.drawRenderedImage(bimg, null);
-        graphic.dispose();
-        return rotated;
-    }
-
-    public BufferedImage toBufferedImage(Image img) {
-
-        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null),
-                BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D graphics2D = bufferedImage.createGraphics();
-        graphics2D.drawImage(img, 0, 0, null);
-        graphics2D.dispose();
-
-        return bufferedImage;
-    }
-
-    public JButton getButton() {
-        return button;
-    }
-
-    public String getPlayerMove() {
-        return textField.getText();
-    }
-
     public void updateBallType(String ballType) {
+
+         ballTypeLabel.setVisible(true);
+         ballTypeLabel.setForeground(Color.RED);
+
         switch (ballType) {
             case "null":
-                ballTypeLabel.setText("");
+                ballTypeLabel.setText("E' il tuo turno");
                 break;
             case "full":
                 ballTypeLabel.setText("Devi colpire una palla piena.");
@@ -253,7 +200,13 @@ public class GUI extends JFrame {
         }
     }
 
+    public void hideTurnLabel(){
+        ballTypeLabel.setVisible(false);
+    }
+
     public void showWaitLabel() {
+        waitLabel.setText("Turno dell'altro giocatore");
+        waitLabel.setForeground(Color.RED);
         waitLabel.setVisible(true);
     }
 
@@ -267,10 +220,7 @@ public class GUI extends JFrame {
         } else {
             endGameLabel.setText("Hai perso!");
         }
+        endGameLabel.setForeground(Color.RED);
         endGameLabel.setVisible(true);
-    }
-
-    public void hideEndGameLabel() {
-        endGameLabel.setVisible(false);
     }
 }

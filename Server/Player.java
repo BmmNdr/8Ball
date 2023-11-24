@@ -52,11 +52,11 @@ public class Player {
     }
 
     public void win() {
-        out.println("1;");
+        out.println("end;1");
     }
 
     public void lose() {
-        out.println("0;");
+        out.println("end;0");
     }
 
     public void sendBallsPositions(String position) {
