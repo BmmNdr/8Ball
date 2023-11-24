@@ -17,10 +17,16 @@ public class app {
                 gameClient.receiveGameState(tmp[1]);
             } else if (tmp[0].equals("turn")) {
                 // Handle turn
+                gameClient.receiveTurn(tmp[1]);
+                gui.hideWaitLabel();
+                gameClient.sendNotification();
             } else if (tmp[0].equals("wait")) {
                 // Handle wait
+                gui.showWaitLabel();
             } else if (tmp[0].equals("end")) {
                 // Handle end
+                boolean hasWon = tmp[1].equals("1");
+                gui.showEndGameLabel(hasWon);
             }
         }
     }

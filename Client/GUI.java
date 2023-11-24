@@ -3,9 +3,12 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import javafx.event.ActionEvent;
+
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +26,14 @@ public class GUI extends JFrame {
     public Image[] ballImages = new Image[16];
 
     private JLabel ballTypeLabel;
+    private JLabel waitLabel;
+    private JLabel endGameLabel;
+
     private Image cueImage;
+
+    public Boolean isturn = false;
+
+    public String message;
 
     public GUI() {
         this.balls = new ArrayList<CBall>();
@@ -43,9 +53,10 @@ public class GUI extends JFrame {
         // Load the images in the array
         for (int i = 0; i < 16; i++) {
             try {
-                File file = new File("./pool_assets/ball" + i + ".png");
+                File fileBall = new File("./pool_assets/ball" + i + ".png");
                 // System.out.println(file.getAbsolutePath());
-                ballImages[i] = ImageIO.read(file).getScaledInstance(CConstants.ballDiameter, CConstants.ballDiameter,
+                ballImages[i] = ImageIO.read(fileBall).getScaledInstance(CConstants.ballDiameter,
+                        CConstants.ballDiameter,
                         Image.SCALE_DEFAULT);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -54,9 +65,9 @@ public class GUI extends JFrame {
 
         // Initialize cueImage with the cue stick image
         try {
-            File file = new File("./pool_assets/cue.png");
+            File fileCue = new File("./pool_assets/cue.png");
             // System.out.println(file.getAbsolutePath());
-            cueImage = ImageIO.read(file);
+            cueImage = ImageIO.read(fileCue);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,6 +76,9 @@ public class GUI extends JFrame {
         Cue cue = new Cue();
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
+                if (!isturn) {
+                    return;
+                }
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         cue.setAngle(cue.getAngle() - 1);
@@ -77,6 +91,11 @@ public class GUI extends JFrame {
                         break;
                     case KeyEvent.VK_DOWN:
                         cue.setPower(Math.max(cue.getPower() - 1, 1));
+                        break;
+                    case KeyEvent.VK_ENTER:
+                        message = cue.getAngle() + ";" + cue.getPower();
+                        setMessage(message);
+                        isturn = false;
                         break;
                 }
                 updateCue(cue);
@@ -112,6 +131,25 @@ public class GUI extends JFrame {
 
         // Repaint the GUI to show the updated cue
         repaint();
+    }
+
+    public void showBallTypeLabelFor10Sec() {
+        ballTypeLabel.setVisible(true);
+
+        Timer timer = new Timer(10000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ballTypeLabel.setVisible(false);
+            }
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            }
+        });
+
+        timer.setRepeats(false);
+        timer.start();
     }
 
     public void updateBalls(List<CBall> balls) {
@@ -168,6 +206,8 @@ public class GUI extends JFrame {
                         ball.getY() + CConstants.heightOffset - CConstants.getRadius(), null);
         }
 
+        showBallTypeLabelFor10Sec();
+
         updateBalls(balls);
 
     }
@@ -180,6 +220,15 @@ public class GUI extends JFrame {
         return textField.getText();
     }
 
+    
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
     public void updateBallType(String ballType) {
         switch (ballType) {
             case "null":
@@ -192,5 +241,25 @@ public class GUI extends JFrame {
                 ballTypeLabel.setText("Devi colpire una palla mezza.");
                 break;
         }
+    }
+
+    public void showWaitLabel() {
+        waitLabel.setVisible(true);
+    }
+    public void hideWaitLabel() {
+        waitLabel.setVisible(false);
+    }
+
+    public void showEndGameLabel(boolean hasWon) {
+        if (hasWon) {
+            endGameLabel.setText("Hai vinto!");
+        } else {
+            endGameLabel.setText("Hai perso!");
+        }
+        endGameLabel.setVisible(true);
+    }
+
+    public void hideEndGameLabel() {
+        endGameLabel.setVisible(false);
     }
 }

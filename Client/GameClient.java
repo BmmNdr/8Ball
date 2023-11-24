@@ -40,6 +40,13 @@ public class GameClient {
         out.println(move);
     }
 
+    public void sendNotification() {
+
+        while(GUI.isturn){}
+
+        out.println(GUI.getMessage());
+    }
+
     public void close() throws IOException {
         clientSocket.close();
     }
@@ -47,6 +54,7 @@ public class GameClient {
     public void receiveTurn(String turn) {
         String[] parts = turn.split(";");
         String ballType = parts[1]; // get the type of ball the player can hit
+        GUI.isturn = true;
         GUI.updateBallType(ballType);
     }
 }
