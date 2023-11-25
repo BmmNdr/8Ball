@@ -164,7 +164,7 @@ public class GameManager {
         }
 
         // Check if the cue ball has been potted (foul)
-        if (balls.get(0).isPotted) {
+        if (balls.get(0).isPotted || foulInTurn) {
             balls.get(0).coordinate = Constants.getBallsInitialPositions()[0];
             balls.get(0).isPotted = false;
             foulInTurn = true;
