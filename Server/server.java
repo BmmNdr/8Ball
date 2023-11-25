@@ -14,8 +14,12 @@ public class server {
             startGame = game.setPlayer(new Player(serverSocket.accept()));
         }
 
-        // STAR GAME!!
-        game.StartGame(); // If GameManager is a Thread, you can have multiple games at the same time
+        try {
+            // START GAME!!
+            game.StartGame(); // If GameManager is a Thread, you can have multiple games at the same time
+        } catch (Exception e) {
+            System.out.println("Giocatori disconnessi");
+        }
 
         serverSocket.close();
     }
