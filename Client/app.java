@@ -19,7 +19,8 @@ public class app {
         GUI gui = new GUI();
         GameClient gameClient = new GameClient(gui, scw.ipAddress, scw.port);
 
-        while (true) {
+        try {
+            while (true) {
             String[] tmp = gameClient.in.readLine().split(";", 2);
 
             if (tmp[0].equals("paint")) {
@@ -38,6 +39,9 @@ public class app {
                 boolean hasWon = tmp[1].equals("1");
                 gui.showEndGameLabel(hasWon);
             }
+        }
+        } catch (Exception e) {
+            System.out.println("Server Chiuso");
         }
     }
 }
