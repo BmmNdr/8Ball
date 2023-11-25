@@ -191,7 +191,7 @@ public class GameManager {
                 if (ball.isPotted) {
                     it.remove();
 
-                    if (turn)
+                    if (!turn)
                         potInTurn = true;
                 }
             }
