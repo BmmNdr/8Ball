@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.net.ServerSocket;
 
+/**
+ * The server class represents the server side of the 8Ball game.
+ * It listens for incoming connections from players and starts the game once two players have connected.
+ */
 public class server {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket;

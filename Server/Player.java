@@ -6,6 +6,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Player class represents a player in the 8 Ball game.
+ * It manages the player's socket, input and output streams, and balls.
+ */
 public class Player {
     private Socket clientSocket;
     private PrintWriter out;
@@ -23,7 +27,10 @@ public class Player {
         balls = new ArrayList<Ball>();
     }
 
-    // Your turn method, returs cue direction and power (cue ball speed and angle)
+    /**
+     * Sends the player wich balls he has
+     * The player returs cue direction and power (cue ball speed and angle)
+     */
     public Vector yourTurn() throws IOException {
 
         String ballType;

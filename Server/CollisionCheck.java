@@ -1,5 +1,9 @@
 import java.util.List;
 
+/**
+ * The CollisionCheck class is responsible for detecting and resolving collisions between balls in a game.
+ * It extends the Thread class to run collision detection and resolution in a separate thread.
+ */
 public class CollisionCheck extends Thread {
     private List<Ball> balls;
 
@@ -12,6 +16,13 @@ public class CollisionCheck extends Thread {
         this.firstPot = null;
     }
 
+    /**
+     * Executes the collision check algorithm.
+     * Resets the firstCueHit and firstPot variables.
+     * Loops through the balls and checks for collisions.
+     * Resolves collisions between balls if they occur.
+     * Sets the firstCueHit and firstPot variables if necessary.
+     */
     @Override
     public void run() {
 
@@ -41,6 +52,11 @@ public class CollisionCheck extends Thread {
         }
     }
 
+    /**
+     * Checks if any of the balls are currently moving.
+     * 
+     * @return true if at least one ball is moving, false otherwise.
+     */
     private boolean ballsMoving() {
         for (Ball ball : balls) {
             if (ball.isMoving)
@@ -50,10 +66,26 @@ public class CollisionCheck extends Thread {
         return false;
     }
 
+    /**
+     * Checks if two balls collide with each other.
+     * 
+     * @param ball the first ball
+     * @param ball2 the second ball
+     * @return true if the balls collide, false otherwise
+     */
     private boolean collideWith(Ball ball, Ball ball2) {
         return ball2.coordinate.distance(ball.coordinate) < Constants.getRadius() + Constants.getRadius();
     }
 
+    /**
+     * Resolves the collision between two balls.
+     * Uses the elastic collision formula to calculate the new velocities and angles of the balls after collision.
+     * Updates the velocities and angles of the balls accordingly.
+     * Also calls the resolveOverlap method to resolve any overlap between the balls.
+     *
+     * @param ball  the first ball involved in the collision
+     * @param ball2 the second ball involved in the collision
+     */
     private void resolveCollision(Ball ball, Ball ball2) {
         // https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects
 
@@ -105,6 +137,11 @@ public class CollisionCheck extends Thread {
         resolveOverlap(ball, ball2);
     }
 
+    /**
+     * Resolves overlap between two balls by moving them apart until they no longer overlap.
+     * @param ball The first ball involved in the overlap.
+     * @param ball2 The second ball involved in the overlap.
+     */
     private void resolveOverlap(Ball ball, Ball ball2) {
         while (ball2.coordinate.distance(ball.coordinate) < Constants.getRadius() + Constants.getRadius()) {
             double d = ball2.coordinate.distance(ball.coordinate);

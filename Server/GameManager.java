@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The GameManager class represents the game manager for the 8 Ball game.
+ * It manages the players, balls, turns, collisions, and game logic.
+ */
 public class GameManager {
     Player player1 = null;
     Player player2 = null;
@@ -42,7 +46,6 @@ public class GameManager {
     }
 
     public boolean setPlayer(Player p) {
-        // TODO send player configs?
         if (player1 == null) {
             player1 = p;
 
@@ -55,7 +58,16 @@ public class GameManager {
         return true; // if both players are sets
     }
 
+    /**
+     * Starts the game by selecting a random player to start and setting up the balls' positions.
+     * Continues the game until a winner is determined.
+     * If a foul occurs or a player fails to pot any ball in their turn, the turn passes to the other player.
+     * Updates the players' scores accordingly at the end of the game.
+     *
+     * @throws IOException if an I/O error occurs during the game.
+     */
     public void StartGame() throws IOException {
+        
         // Select random player to start
         this.turn = new Random().nextBoolean();
 
@@ -91,6 +103,14 @@ public class GameManager {
         }
     }
 
+    /**
+     * Executes a turn in the game.
+     * This method resets the turn variables, gets the cue direction and force from the current player,
+     * sets the cue ball velocity, moves the balls, checks for fouls and collisions,
+     * updates the player's ball types if necessary, handles potted balls, and updates the players' ball lists.
+     *
+     * @throws IOException if a player disconnects during the turn.
+     */
     public void Turn() throws IOException {
         // Reset turn var
         potInTurn = false;
@@ -198,6 +218,12 @@ public class GameManager {
         }
     }
 
+    /**
+     * Moves the balls in the game by starting the threads for each ball and performing collision checks.
+     * This method waits for the threads to finish before returning.
+     *
+     * @throws InterruptedException if the thread is interrupted while waiting for the threads to finish.
+     */
     public void moveBalls() throws InterruptedException {
 
         // Makes threads from runnable objects every time so i can "re-start" them
@@ -233,6 +259,13 @@ public class GameManager {
         }
     }
 
+    /**
+     * Sends the positions of the balls to the players.
+     * Creates a string with the positions of all the balls and sends it to the players.
+     * The string is formatted as "paint;ball1;ball2;ball3;...".
+     * The players will then send this string to the client.
+     * If debug mode is disabled, the positions are sent to both players.
+     */
     public void sendBallsPosition() {
         // create string with balls position
         String toSend = "paint;";
@@ -247,6 +280,11 @@ public class GameManager {
             player2.sendBallsPositions(toSend);
     }
 
+    /**
+     * Checks if the game has ended and determines the winner.
+     * 
+     * @return 0 if the game has not ended, 1 if player 1 wins, 2 if player 2 wins.
+     */
     public int checkEndGame() {
 
         if (player1.balls.isEmpty() && balls.get(8).isPotted)

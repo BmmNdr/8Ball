@@ -2,12 +2,22 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.InetAddress;
 
+/**
+ * The ServerConnectionWindow class represents a graphical user interface window for connecting to a server.
+ * It allows the user to enter an IP address and port number, and then attempts to establish a connection to the server.
+ */
 public class ServerConnectionWindow {
 
     public String ipAddress;
     public int port;
     public JFrame frame;
 
+    /**
+     * Checks if the given IP address is valid.
+     * 
+     * @param ip the IP address to be validated
+     * @return true if the IP address is valid, false otherwise
+     */
     private static boolean isValidIP(String ip) {
         try {
             if (ip == null || ip.isEmpty()) {
@@ -36,6 +46,12 @@ public class ServerConnectionWindow {
         }
     }
 
+    /**
+     * Pings the server at the specified IP address to check if it is reachable.
+     * 
+     * @param ipAddress the IP address of the server
+     * @return true if the server is reachable, false otherwise
+     */
     private static boolean pingServer(String ipAddress) {
         try {
             InetAddress address = InetAddress.getByName(ipAddress);
@@ -52,6 +68,7 @@ public class ServerConnectionWindow {
         }
     }
 
+    
     public ServerConnectionWindow() {
         frame = new JFrame("Server Connection");
         frame.setSize(300, 200);

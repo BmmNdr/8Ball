@@ -17,6 +17,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * The GUI class represents the graphical user interface for the 8 Ball game.
+ * It extends the JFrame class and provides methods for rendering the game elements,
+ * updating the game state, and displaying messages to the user.
+ */
 public class GUI extends JFrame {
     private List<CBall> balls;
 

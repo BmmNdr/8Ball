@@ -1,3 +1,7 @@
+/**
+ * The Ball class represents a ball in a pool game.
+ * It extends the Thread class to enable concurrent movement of multiple balls.
+ */
 public class Ball extends Thread {
     public Coord coordinate;
     public Vector velocity; // angle and intesity
@@ -9,6 +13,11 @@ public class Ball extends Thread {
     public boolean stop;
     // Mass is equal for every ball
 
+    /**
+     * Represents a ball in the game.
+     * Each ball has a coordinate, a status of being half or not, and a number.
+     * It also has a velocity and a flag indicating if it is currently moving.
+     */
     public Ball(Coord coordinate, boolean isHalf, int number) {
         this.coordinate = coordinate;
         this.isHalf = isHalf;
@@ -19,6 +28,13 @@ public class Ball extends Thread {
         isMoving = false;
     }
 
+    /**
+     * Runs the ball's movement and collision logic.
+     * If the ball is not potted and the stop flag is not set, the ball will continue moving.
+     * The ball's position is updated based on its velocity and friction is applied to slow it down.
+     * The ball's position is checked for collision with pockets and walls.
+     * Once the ball is potted or the stop flag is set, the ball's velocity is reset to zero.
+     */
     @Override
     public void run() {
         isMoving = !isPotted;
@@ -55,6 +71,10 @@ public class Ball extends Thread {
         velocity.angle = 0;
     }
 
+    /**
+     * Checks if the ball has been potted by searching for a point inside a circle (the pot).
+     * If the ball is potted, it calls the pot() method and prints a message indicating the potted ball number.
+     */
     private void checkPot() {
         // Serach for point inside a circle
         for (Coord pot : Constants.potsPositions) {
@@ -68,6 +88,11 @@ public class Ball extends Thread {
         }
     }
 
+    /**
+     * Handles the collision of the ball with the walls of the table.
+     * If the ball collides with a wall, its direction is reversed and its angle and magnitude are updated accordingly.
+     * Additionally, if the ball goes beyond the boundaries of the table, its coordinates are adjusted to keep it within the table.
+     */
     private void wallCollision() {
 
         double ballDX = this.getDX();
@@ -111,6 +136,13 @@ public class Ball extends Thread {
             this.coordinate.setX(Constants.getRadius());
     }
 
+    /**
+     * Returns a string representation of the Ball object.
+     * The string contains the number of the ball, followed by an underscore,
+     * and either the coordinates of the ball if it is not potted, or -1_-1 if it is potted.
+     *
+     * @return a string representation of the Ball object
+     */
     @Override
     public String toString() {
         String tmp = Integer.toString(number) + "_";
